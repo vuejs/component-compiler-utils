@@ -1,0 +1,5 @@
+test
+jest.config.js
+tsconfig.json
+*.log
+*.lock

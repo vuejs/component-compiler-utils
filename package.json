@@ -1,0 +1,46 @@
+{
+  "name": "@vue/component-compiler-utils",
+  "version": "1.0.0",
+  "description": "Lower level utilities for compiling Vue single file components",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/vue-component-compiler-utils.git"
+  },
+  "keywords": [
+    "vue",
+    "sfc",
+    "component",
+    "compiler"
+  ],
+  "author": "Evan You",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vuejs/vue-component-compiler-utils/issues"
+  },
+  "homepage": "https://github.com/vuejs/vue-component-compiler-utils#readme",
+  "devDependencies": {
+    "@types/node": "^9.4.7",
+    "jest": "^22.4.2",
+    "pug": "^2.0.3",
+    "ts-jest": "^22.4.2",
+    "typescript": "^2.7.2",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "dependencies": {
+    "consolidate": "^0.15.1",
+    "hash-sum": "^1.0.2",
+    "lru-cache": "^4.1.2",
+    "postcss": "^6.0.20",
+    "postcss-selector-parser": "^3.1.1",
+    "prettier": "^1.11.1",
+    "source-map": "^0.5.6",
+    "vue-template-es2015-compiler": "^1.6.0"
+  }
+}
