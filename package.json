@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vuejs/vue-component-compiler-utils.git"
+    "url": "git+https://github.com/vuejs/component-compiler-utils.git"
   },
   "keywords": [
     "vue",
@@ -22,9 +22,9 @@
   "author": "Evan You",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/vue-component-compiler-utils/issues"
+    "url": "https://github.com/vuejs/component-compiler-utils/issues"
   },
-  "homepage": "https://github.com/vuejs/vue-component-compiler-utils#readme",
+  "homepage": "https://github.com/vuejs/component-compiler-utils#readme",
   "devDependencies": {
     "@types/node": "^9.4.7",
     "jest": "^22.4.2",
