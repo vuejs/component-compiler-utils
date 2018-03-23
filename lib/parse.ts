@@ -81,7 +81,10 @@ function generateSourceMap(
   generated: string,
   sourceRoot: string
 ): RawSourceMap {
-  const map = new SourceMapGenerator({ sourceRoot })
+  const map = new SourceMapGenerator({
+    file: filename,
+    sourceRoot
+  })
   map.setSourceContent(filename, source)
   generated.split(splitRE).forEach((line, index) => {
     if (!emptyRE.test(line)) {
