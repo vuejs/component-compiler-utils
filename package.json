@@ -37,6 +37,7 @@
     "consolidate": "^0.15.1",
     "hash-sum": "^1.0.2",
     "lru-cache": "^4.1.2",
+    "merge-source-map": "^1.1.0",
     "postcss": "^6.0.20",
     "postcss-selector-parser": "^3.1.1",
     "prettier": "^1.11.1",
