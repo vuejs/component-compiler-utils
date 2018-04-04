@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "jest test",
+    "test": "jest",
     "build": "tsc",
-    "prepublishOnly": "yarn"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
