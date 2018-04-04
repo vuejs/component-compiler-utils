@@ -46,7 +46,11 @@ const sass = {
     map: any | null,
     options: any
   ): StylePreprocessorResults {
-    return scss.render(source, map, Object.assign({}, options, { indentedSyntax: true }))
+    return scss.render(
+      source,
+      map,
+      Object.assign({}, options, { indentedSyntax: true })
+    )
   }
 }
 
