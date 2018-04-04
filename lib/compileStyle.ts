@@ -2,6 +2,7 @@ import { ProcessOptions, LazyResult } from 'postcss'
 import postcss = require('postcss')
 import trimPlugin from './stylePlugins/trim'
 import scopedPlugin from './stylePlugins/scoped'
+import { processors, StylePreprocessor, StylePreprocessorResults } from './styleProcessors'
 
 export interface StyleCompileOptions {
   source: string
@@ -10,6 +11,8 @@ export interface StyleCompileOptions {
   map?: any
   scoped?: boolean
   trim?: boolean
+  preprocessLang?: string
+  preprocessOptions?: any
 }
 
 export interface StyleCompileResults {
@@ -23,13 +26,16 @@ export function compileStyle (
   options: StyleCompileOptions
 ): StyleCompileResults {
   const {
-    source,
     filename,
     id,
-    map,
     scoped = true,
-    trim = true
+    trim = true,
+    preprocessLang
   } = options
+  const preprocessor = preprocessLang && processors[preprocessLang]
+  const preProcessedSource = preprocessor && preprocess(options, preprocessor)
+  const map = preProcessedSource ? preProcessedSource.map : options.map
+  const source = preProcessedSource ? preProcessedSource.code : options.source
 
   const plugins = []
   if (trim) {
@@ -68,4 +74,13 @@ export function compileStyle (
     errors,
     rawResult: result
   }
+}
+
+function preprocess(
+  options: StyleCompileOptions,
+  preprocessor: StylePreprocessor
+): StylePreprocessorResults {
+  return preprocessor.render(options.source, options.map, Object.assign({
+    filename: options.filename
+  }, options.preprocessOptions))
 }
