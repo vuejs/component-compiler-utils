@@ -95,8 +95,38 @@ const less = {
   }
 }
 
+// .styl
+const styl = {
+  render(
+    source: string,
+    map: any | null,
+    options: any
+  ): StylePreprocessorResults {
+    const nodeStylus = require('stylus')
+    try {
+      const ref = nodeStylus(source)
+      Object.keys(options).forEach(key => ref.set(key, options[key]))
+      if (map) ref.set('sourcemap', { inline: false, comment: false })
+
+      const result = ref.render()
+      if (map) {
+        return {
+          code: result,
+          map: merge(map, ref.sourcemap),
+          errors: []
+        }
+      }
+
+      return { code: result, errors: [] }
+    } catch (e) {
+      return { code: '', errors: [e] }
+    }
+  }
+}
+
 export const processors: { [key: string]: StylePreprocessor } = {
   less,
+  sass,
   scss,
-  sass
+  styl
 }
