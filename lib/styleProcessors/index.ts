@@ -1,46 +1,44 @@
-import merge from "merge-source-map";
+import merge from 'merge-source-map'
 
 export interface StylePreprocessor {
   render(
     source: string,
     map: any | null,
     options: any
-  ): StylePreprocessorResults;
+  ): StylePreprocessorResults
 }
 
 export interface StylePreprocessorResults {
-  source: string;
-  map?: any;
+  code: string
+  map?: any
 }
 
 // .scss/.sass processor
-let nodeSass: any;
 const scss: StylePreprocessor = {
   render(
     source: string,
     map: any | null,
     options: any
   ): StylePreprocessorResults {
-    if (!nodeSass) nodeSass = require("node-sass");
-
+    const nodeSass = require('node-sass')
     const finalOptions = Object.assign({}, options, {
       data: source,
       file: options.filename,
       sourceMap: !!map
-    });
+    })
 
-    const result = nodeSass.renderSync(finalOptions);
+    const result = nodeSass.renderSync(finalOptions)
 
     if (map) {
       return {
-        source: result.css.toString(),
+        code: result.css.toString(),
         map: merge(map, JSON.parse(result.map.toString()))
-      };
+      }
     }
 
-    return { source: result.css.toString() };
+    return { code: result.css.toString() }
   }
-};
+}
 
 const sass = {
   render(
@@ -55,4 +53,4 @@ const sass = {
 export const processors: { [key: string]: StylePreprocessor } = {
   scss,
   sass
-};
+}

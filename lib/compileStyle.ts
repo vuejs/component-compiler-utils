@@ -33,7 +33,9 @@ export function compileStyle (
     preprocessLang
   } = options
   const preprocessor = preprocessLang && processors[preprocessLang]
-  const { map, source } = preprocessor ? preprocess(options, preprocessor) : options
+  const preProcessedSource = preprocessor && preprocess(options, preprocessor)
+  const map = preProcessedSource ? preProcessedSource.map : options.map
+  const source = preProcessedSource ? preProcessedSource.code : options.source
 
   const plugins = []
   if (trim) {
