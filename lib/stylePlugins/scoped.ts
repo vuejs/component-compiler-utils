@@ -1,5 +1,5 @@
 import { Root } from 'postcss'
-import postcss = require('postcss')
+import * as postcss from 'postcss'
 // postcss-selector-parser does have typings but it's problematic to work with.
 const selectorParser = require('postcss-selector-parser')
 

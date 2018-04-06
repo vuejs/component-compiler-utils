@@ -1,5 +1,5 @@
 import { Root } from 'postcss'
-import postcss = require('postcss')
+import * as postcss from 'postcss'
 
 export default postcss.plugin('trim', () => (css: Root) => {
   css.walk(({ type, raws }) => {

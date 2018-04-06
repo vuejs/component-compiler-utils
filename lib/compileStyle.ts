@@ -1,5 +1,4 @@
-import { ProcessOptions, LazyResult } from 'postcss'
-import postcss = require('postcss')
+import postcss, { ProcessOptions, LazyResult } from 'postcss'
 import trimPlugin from './stylePlugins/trim'
 import scopedPlugin from './stylePlugins/scoped'
 import { processors, StylePreprocessor, StylePreprocessorResults } from './styleProcessors'
@@ -59,6 +58,9 @@ export function compileStyle (
 
   let result, code, outMap
   const errors = []
+  if (preProcessedSource && preProcessedSource.errors.length) {
+    errors.push(...preProcessedSource.errors)
+  }
   try {
     result = postcss(plugins).process(source, postCSSOptions)
     // force synchronous transform (we know we only have sync plugins)
