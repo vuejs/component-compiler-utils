@@ -1,4 +1,4 @@
-import merge from 'merge-source-map'
+const merge = require('merge-source-map')
 
 export interface StylePreprocessor {
   render(
