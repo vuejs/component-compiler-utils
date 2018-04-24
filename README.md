@@ -1,4 +1,4 @@
-# @vue/component-compiler-utils
+# @vue/component-compiler-utils [![Build Status](https://circleci.com/gh/vuejs/component-compiler-utils/tree/master.svg?style=shield)](https://circleci.com/gh/vuejs/component-compiler-utils/)
 
 > Lower level utilities for compiling Vue single file components
 
