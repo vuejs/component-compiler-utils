@@ -57,13 +57,13 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
   if (Object.keys(keyframes).length) {
     root.walkDecls(decl => {
       // individual animation-name declaration
-      if (/-?animation-name$/.test(decl.prop)) {
+      if (/^(-\w+-)?animation-name$/.test(decl.prop)) {
         decl.value = decl.value.split(',')
           .map(v => keyframes[v.trim()] || v.trim())
           .join(',')
       }
       // shorthand
-      if (/-?animation$/.test(decl.prop)) {
+      if (/^(-\w+-)?animation$/.test(decl.prop)) {
         decl.value = decl.value.split(',')
           .map(v => {
             const vals = v.trim().split(/\s+/)
