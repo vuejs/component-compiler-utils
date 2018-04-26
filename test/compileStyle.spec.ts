@@ -98,3 +98,29 @@ test('preprocess stylus', () => {
   expect(result.code).toEqual(expect.stringContaining('color: #f00;'))
   expect(result.map).toBeTruthy()
 })
+
+test('custom postcss plugin', () => {
+  const spy = jest.fn()
+  
+  compileStyle({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => spy)()]
+  })
+
+  expect(spy).toHaveBeenCalled()
+})
+
+test('custom postcss options', () => {
+  const result = compileStyle({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    postcssOptions: { random: 'foo' }
+  })
+
+  expect((<any>result.rawResult).opts.random).toBe('foo')
+})
