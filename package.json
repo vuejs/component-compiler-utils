@@ -6,7 +6,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "prepublishOnly": "yarn build && conventional-changelog -p angular -r 2 -i CHANGELOG.md -s"
   },
   "repository": {
