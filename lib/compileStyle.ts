@@ -40,7 +40,7 @@ export function compileStyle (
   const map = preProcessedSource ? preProcessedSource.map : options.map
   const source = preProcessedSource ? preProcessedSource.code : options.source
 
-  const plugins = postcssPlugins || []
+  const plugins = (postcssPlugins || []).slice()
   if (trim) {
     plugins.push(trimPlugin())
   }
