@@ -12,6 +12,8 @@ export interface StyleCompileOptions {
   trim?: boolean
   preprocessLang?: string
   preprocessOptions?: any
+  postcssOptions?: any
+  postcssPlugins?: any[]
 }
 
 export interface StyleCompileResults {
@@ -29,14 +31,16 @@ export function compileStyle (
     id,
     scoped = true,
     trim = true,
-    preprocessLang
+    preprocessLang,
+    postcssOptions,
+    postcssPlugins
   } = options
   const preprocessor = preprocessLang && processors[preprocessLang]
   const preProcessedSource = preprocessor && preprocess(options, preprocessor)
   const map = preProcessedSource ? preProcessedSource.map : options.map
   const source = preProcessedSource ? preProcessedSource.code : options.source
 
-  const plugins = []
+  const plugins = (postcssPlugins || []).slice()
   if (trim) {
     plugins.push(trimPlugin())
   }
@@ -45,6 +49,7 @@ export function compileStyle (
   }
 
   const postCSSOptions: ProcessOptions = {
+    ...postcssOptions,
     to: filename,
     from: filename
   }
