@@ -47,8 +47,8 @@ export function compileTemplate (
         `var staticRenderFns = []\n`
       ),
       source: options.source,
-      tips: [`Please install ${preprocessLang}`],
-      errors: [`Please install ${preprocessLang}`]
+      tips: [`Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`],
+      errors: [`Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`]
     };
   } else {
     return actuallyCompile(options)

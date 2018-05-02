@@ -23,8 +23,6 @@ test('preprocess pug', () => {
   })
 
   expect(result.errors.length).toBe(0)
-  //expect(result.code).toEqual(expect.stringContaining('color: #ff0000;'))
-  //expect(result.map).toBeTruthy()
 })
 
 test('preprocess pug', () => {
@@ -44,6 +42,4 @@ test('preprocess pug', () => {
   })
 
   expect(result.errors.length).toBe(1)
-  //expect(result.code).toEqual(expect.stringContaining('color: #ff0000;'))
-  //expect(result.map).toBeTruthy()
 })
