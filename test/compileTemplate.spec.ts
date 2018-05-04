@@ -25,7 +25,7 @@ test('preprocess pug', () => {
   expect(result.errors.length).toBe(0)
 })
 
-test('preprocess pug', () => {
+test('warn missing preprocessor', () => {
   const template = parse({
     source:
       '<template lang="unknownLang">\n' +
