@@ -40,6 +40,16 @@ export function compileTemplate (
     return actuallyCompile(Object.assign({}, options, {
       source: preprocess(options, preprocessor)
     }))
+  } else if (preprocessLang) {
+    return {
+      code: (
+        `var render = function () {}\n` +
+        `var staticRenderFns = []\n`
+      ),
+      source: options.source,
+      tips: [`Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`],
+      errors: [`Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`]
+    };
   } else {
     return actuallyCompile(options)
   }
