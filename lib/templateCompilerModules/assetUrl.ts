@@ -10,7 +10,7 @@ const defaultOptions: AssetURLOptions = {
   video: ['src', 'poster'],
   source: 'src',
   img: 'src',
-  image: 'xlink:href'
+  image: ['xlink:href', 'href']
 }
 
 export default (userOptions?: AssetURLOptions) => {
