@@ -1,3 +1,14 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/vuejs/component-compiler-utils/compare/v1.2.1...v1.3.0) (2018-05-22)
+
+
+### Features
+
+* include href for <image> in transformAssetUrls (close [#12](https://github.com/vuejs/component-compiler-utils/issues/12)) ([86fddc2](https://github.com/vuejs/component-compiler-utils/commit/86fddc2))
+* Provide installation instructions on missing language preprocessors ([#10](https://github.com/vuejs/component-compiler-utils/issues/10)) ([97e772c](https://github.com/vuejs/component-compiler-utils/commit/97e772c))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/vuejs/component-compiler-utils/compare/v1.2.0...v1.2.1) (2018-04-26)
 
