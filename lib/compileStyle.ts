@@ -11,6 +11,7 @@ export interface StyleCompileOptions {
   map?: any
   scoped?: boolean
   trim?: boolean
+  sync?: boolean
   preprocessLang?: string
   preprocessOptions?: any
   postcssOptions?: any
@@ -63,7 +64,7 @@ export function compileStyle (
   }
 
   let result, code, outMap
-  const errors = []
+  const errors: any[] = []
   if (preProcessedSource && preProcessedSource.errors.length) {
     errors.push(...preProcessedSource.errors)
   }
@@ -73,6 +74,25 @@ export function compileStyle (
     code = result.css
     outMap = result.map
   } catch (e) {
+    if (/work with async plugins/i.test(e.message)) {
+      if (options.sync !== true) {
+        return postcss(plugins)
+          .process(source, postCSSOptions)
+          .then((result: LazyResult): StyleCompileResults => ({
+            code: result.css || '',
+            map: result.map && result.map.toJSON(),
+            errors,
+            rawResult: result
+          }))
+          .catch((error: Error): StyleCompileResults => ({
+            code: '',
+            map: undefined,
+            errors: [...errors, error.message],
+            rawResult: undefined
+          }))
+      }
+    }
+
     errors.push(e)
   }
 

@@ -116,6 +116,11 @@ interface StyleCompileOptions {
   map?: any
   scoped?: boolean
   trim?: boolean
+  sync?: boolean // Force sync compilation
+  preprocessLang?: string
+  preprocessOptions?: any
+  postcssOptions?: any
+  postcssPlugins?: any[]
 }
 
 interface StyleCompileResults {

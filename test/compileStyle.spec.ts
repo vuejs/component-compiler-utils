@@ -122,5 +122,31 @@ test('custom postcss options', () => {
     postcssOptions: { random: 'foo' }
   })
 
-  expect((<any>result.rawResult).opts.random).toBe('foo')
+  expect((result.rawResult).opts.random).toBe('foo')
+})
+
+test('async postcss plugin in sync mode', () => {
+  const result = compileStyle({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    sync: true,
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+  })
+
+  expect(result.errors).toHaveLength(1)
+})
+
+
+test('async postcss plugin', async () => {
+  const result = await compileStyle({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+  })
+
+  expect(result.errors).toHaveLength(0)
 })
