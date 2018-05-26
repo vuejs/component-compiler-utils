@@ -140,7 +140,7 @@ test('async postcss plugin in sync mode', () => {
 
 
 test('async postcss plugin', async () => {
-  const result = await compileStyle({
+  const promise = compileStyle({
     id: 'v-scope-xxx',
     filename: 'example.vue',
     source: '.foo { color: red }',
@@ -148,5 +148,9 @@ test('async postcss plugin', async () => {
     postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
   })
 
+  expect(promise instanceof Promise).toBe(true)
+  
+  const result = await promise
   expect(result.errors).toHaveLength(0)
+  expect(result.code).toEqual(expect.stringContaining('color: red'))
 })
