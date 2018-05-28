@@ -45,7 +45,7 @@
     "merge-source-map": "^1.1.0",
     "postcss": "^6.0.20",
     "postcss-selector-parser": "^3.1.1",
-    "prettier": "^1.11.1",
+    "prettier": "^1.13.0",
     "source-map": "^0.5.6",
     "vue-template-es2015-compiler": "^1.6.0"
   }
