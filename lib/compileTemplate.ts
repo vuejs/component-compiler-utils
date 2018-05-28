@@ -158,7 +158,7 @@ function actuallyCompile (
       // mark with stripped (this enables Vue to use correct runtime proxy
       // detection)
       code += `render._withStripped = true`
-      code = prettier.format(code, { semi: false })
+      code = prettier.format(code, { semi: false, parser: 'babylon' })
     }
 
     return {
