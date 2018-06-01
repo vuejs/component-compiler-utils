@@ -11,11 +11,14 @@ export interface StyleCompileOptions {
   map?: any
   scoped?: boolean
   trim?: boolean
-  sync?: boolean
   preprocessLang?: string
   preprocessOptions?: any
   postcssOptions?: any
   postcssPlugins?: any[]
+}
+
+export interface AsyncStyleCompileOptions extends StyleCompileOptions {
+  isAsync?: boolean
 }
 
 export interface StyleCompileResults {
@@ -27,6 +30,18 @@ export interface StyleCompileResults {
 
 export function compileStyle (
   options: StyleCompileOptions
+): StyleCompileResults { 
+  return doCompileStyle({ ...options, isAsync: false })
+}
+
+export function compileStyleAsync (
+  options: StyleCompileOptions
+): Promise<StyleCompileResults> {
+  return Promise.resolve(doCompileStyle({ ...options, isAsync: true }))
+}
+
+export function doCompileStyle (
+  options: AsyncStyleCompileOptions
 ): StyleCompileResults {
   const {
     filename,
@@ -70,29 +85,28 @@ export function compileStyle (
   }
   try {
     result = postcss(plugins).process(source, postCSSOptions)
+
+    // In async mode, return a promise.
+    if (options.isAsync) {
+      return result
+        .then((result: LazyResult): StyleCompileResults => ({
+          code: result.css || '',
+          map: result.map && result.map.toJSON(),
+          errors,
+          rawResult: result
+        }))
+        .catch((error: Error): StyleCompileResults => ({
+          code: '',
+          map: undefined,
+          errors: [...errors, error.message],
+          rawResult: undefined
+        }))
+    }
+
     // force synchronous transform (we know we only have sync plugins)
     code = result.css
     outMap = result.map
   } catch (e) {
-    if (/work with async plugins/i.test(e.message)) {
-      if (options.sync !== true) {
-        return postcss(plugins)
-          .process(source, postCSSOptions)
-          .then((result: LazyResult): StyleCompileResults => ({
-            code: result.css || '',
-            map: result.map && result.map.toJSON(),
-            errors,
-            rawResult: result
-          }))
-          .catch((error: Error): StyleCompileResults => ({
-            code: '',
-            map: undefined,
-            errors: [...errors, error.message],
-            rawResult: undefined
-          }))
-      }
-    }
-
     errors.push(e)
   }
 

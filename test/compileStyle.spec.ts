@@ -1,5 +1,5 @@
 import { parse } from '../lib/parse'
-import { compileStyle } from '../lib/compileStyle'
+import { compileStyle, compileStyleAsync } from '../lib/compileStyle'
 
 test('preprocess less', () => {
   const style = parse({
@@ -131,7 +131,6 @@ test('async postcss plugin in sync mode', () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    sync: true,
     postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
   })
 
@@ -140,7 +139,7 @@ test('async postcss plugin in sync mode', () => {
 
 
 test('async postcss plugin', async () => {
-  const promise = compileStyle({
+  const promise = compileStyleAsync({
     id: 'v-scope-xxx',
     filename: 'example.vue',
     source: '.foo { color: red }',
