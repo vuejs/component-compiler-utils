@@ -13,6 +13,7 @@ import {
 
 import {
   compileStyle,
+  compileStyleAsync,
   StyleCompileOptions,
   StyleCompileResults
 } from './compileStyle'
@@ -21,7 +22,8 @@ import {
 export {
   parse,
   compileTemplate,
-  compileStyle
+  compileStyle,
+  compileStyleAsync
 }
 
 // types

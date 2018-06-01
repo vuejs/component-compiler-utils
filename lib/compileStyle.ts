@@ -17,6 +17,10 @@ export interface StyleCompileOptions {
   postcssPlugins?: any[]
 }
 
+export interface AsyncStyleCompileOptions extends StyleCompileOptions {
+  isAsync?: boolean
+}
+
 export interface StyleCompileResults {
   code: string
   map: any | void
@@ -26,6 +30,18 @@ export interface StyleCompileResults {
 
 export function compileStyle (
   options: StyleCompileOptions
+): StyleCompileResults { 
+  return doCompileStyle({ ...options, isAsync: false })
+}
+
+export function compileStyleAsync (
+  options: StyleCompileOptions
+): Promise<StyleCompileResults> {
+  return Promise.resolve(doCompileStyle({ ...options, isAsync: true }))
+}
+
+export function doCompileStyle (
+  options: AsyncStyleCompileOptions
 ): StyleCompileResults {
   const {
     filename,
@@ -63,12 +79,30 @@ export function compileStyle (
   }
 
   let result, code, outMap
-  const errors = []
+  const errors: any[] = []
   if (preProcessedSource && preProcessedSource.errors.length) {
     errors.push(...preProcessedSource.errors)
   }
   try {
     result = postcss(plugins).process(source, postCSSOptions)
+
+    // In async mode, return a promise.
+    if (options.isAsync) {
+      return result
+        .then((result: LazyResult): StyleCompileResults => ({
+          code: result.css || '',
+          map: result.map && result.map.toJSON(),
+          errors,
+          rawResult: result
+        }))
+        .catch((error: Error): StyleCompileResults => ({
+          code: '',
+          map: undefined,
+          errors: [...errors, error.message],
+          rawResult: undefined
+        }))
+    }
+
     // force synchronous transform (we know we only have sync plugins)
     code = result.css
     outMap = result.map

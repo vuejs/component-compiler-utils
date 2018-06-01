@@ -1,5 +1,5 @@
 import { parse } from '../lib/parse'
-import { compileStyle } from '../lib/compileStyle'
+import { compileStyle, compileStyleAsync } from '../lib/compileStyle'
 
 test('preprocess less', () => {
   const style = parse({
@@ -122,5 +122,34 @@ test('custom postcss options', () => {
     postcssOptions: { random: 'foo' }
   })
 
-  expect((<any>result.rawResult).opts.random).toBe('foo')
+  expect((result.rawResult).opts.random).toBe('foo')
+})
+
+test('async postcss plugin in sync mode', () => {
+  const result = compileStyle({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+  })
+
+  expect(result.errors).toHaveLength(1)
+})
+
+
+test('async postcss plugin', async () => {
+  const promise = compileStyleAsync({
+    id: 'v-scope-xxx',
+    filename: 'example.vue',
+    source: '.foo { color: red }',
+    scoped: false,
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+  })
+
+  expect(promise instanceof Promise).toBe(true)
+  
+  const result = await promise
+  expect(result.errors).toHaveLength(0)
+  expect(result.code).toEqual(expect.stringContaining('color: red'))
 })

@@ -116,6 +116,10 @@ interface StyleCompileOptions {
   map?: any
   scoped?: boolean
   trim?: boolean
+  preprocessLang?: string
+  preprocessOptions?: any
+  postcssOptions?: any
+  postcssPlugins?: any[]
 }
 
 interface StyleCompileResults {
@@ -125,3 +129,7 @@ interface StyleCompileResults {
   errors: string[]
 }
 ```
+
+### compileStyleAsync(StyleCompileOptions)
+
+Same as `compileStyle(StyleCompileOptions)` but it returns a Promise resolving to `StyleCompileResults`. It can be used with async postcss plugins.
