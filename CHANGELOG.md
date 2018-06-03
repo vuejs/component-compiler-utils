@@ -1,3 +1,20 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/vuejs/component-compiler-utils/compare/v1.3.1...v2.0.0) (2018-06-03)
+
+
+### Features
+
+* Add async style compilation support ([#13](https://github.com/vuejs/component-compiler-utils/issues/13)) ([54464d6](https://github.com/vuejs/component-compiler-utils/commit/54464d6))
+* allow/require compiler to be passed in for `parse` ([caa1538](https://github.com/vuejs/component-compiler-utils/commit/caa1538))
+
+
+### BREAKING CHANGES
+
+* vue template compiler must now be passed to `parse`
+via options.
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/vuejs/component-compiler-utils/compare/v1.3.0...v1.3.1) (2018-05-28)
 
