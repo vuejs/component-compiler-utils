@@ -1,3 +1,5 @@
+import { SFCDescriptor } from './parse'
+
 export interface StartOfSourceMap {
   file?: string;
   sourceRoot?: string;
@@ -12,6 +14,11 @@ export interface RawSourceMap extends StartOfSourceMap {
 }
 
 export interface VueTemplateCompiler {
+  parseComponent(
+    source: string,
+    options?: any
+  ): SFCDescriptor
+
   compile(
     template: string,
     options: VueTemplateCompilerOptions
@@ -28,6 +35,10 @@ export interface VueTemplateCompiler {
 // part of the vue monorepo.
 export interface VueTemplateCompilerOptions {
   modules?: Object[]
+}
+
+export interface VueTemplateCompilerParseOptions {
+  pad?: 'line' | 'space'
 }
 
 export interface VueTemplateCompilerResults {

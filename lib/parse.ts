@@ -1,8 +1,11 @@
-import { RawSourceMap } from './types'
+import {
+  RawSourceMap,
+  VueTemplateCompiler,
+  VueTemplateCompilerParseOptions
+} from './types'
 
 const hash = require('hash-sum')
 const cache = require('lru-cache')(100)
-const compiler = require('vue-template-compiler')
 const { SourceMapGenerator } = require('source-map')
 
 const splitRE = /\r?\n/g
@@ -11,6 +14,8 @@ const emptyRE = /^(?:\/\/)?\s*$/
 export interface ParseOptions {
   source: string
   filename?: string
+  compiler: VueTemplateCompiler
+  compilerParseOptions?: VueTemplateCompilerParseOptions
   sourceRoot?: string
   needMap?: boolean
 }
@@ -42,13 +47,15 @@ export function parse(options: ParseOptions): SFCDescriptor {
   const {
     source,
     filename = '',
+    compiler,
+    compilerParseOptions = { pad: 'line' },
     sourceRoot = process.cwd(),
     needMap = true
   } = options
   const cacheKey = hash(filename + source)
   let output: SFCDescriptor = cache.get(cacheKey)
   if (output) return output
-  output = compiler.parseComponent(source, { pad: 'line' })
+  output = compiler.parseComponent(source, compilerParseOptions)
   if (needMap) {
     if (output.script && !output.script.src) {
       output.script.map = generateSourceMap(

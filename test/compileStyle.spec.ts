@@ -1,5 +1,6 @@
 import { parse } from '../lib/parse'
 import { compileStyle, compileStyleAsync } from '../lib/compileStyle'
+import * as compiler from 'vue-template-compiler'
 
 test('preprocess less', () => {
   const style = parse({
@@ -8,6 +9,7 @@ test('preprocess less', () => {
       '@red: rgb(255, 0, 0);\n' +
       '.color { color: @red; }\n' +
       '</style>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -32,6 +34,7 @@ test('preprocess scss', () => {
       '$red: rgb(255, 0, 0);\n' +
       '.color { color: $red; }\n' +
       '</style>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -57,6 +60,7 @@ test('preprocess sass', () => {
       '.color\n' +
       '   color: $red\n' +
       '</style>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -82,6 +86,7 @@ test('preprocess stylus', () => {
       '.color\n' +
       '   color: red-color\n' +
       '</style>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -101,7 +106,7 @@ test('preprocess stylus', () => {
 
 test('custom postcss plugin', () => {
   const spy = jest.fn()
-  
+
   compileStyle({
     id: 'v-scope-xxx',
     filename: 'example.vue',
@@ -148,7 +153,7 @@ test('async postcss plugin', async () => {
   })
 
   expect(promise instanceof Promise).toBe(true)
-  
+
   const result = await promise
   expect(result.errors).toHaveLength(0)
   expect(result.code).toEqual(expect.stringContaining('color: red'))

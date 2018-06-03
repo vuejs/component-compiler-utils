@@ -6,16 +6,26 @@ This package contains lower level utilities that you can use if you are writing 
 
 The API surface is intentionally minimal - the goal is to reuse as much as possible while being as flexible as possible.
 
+## Why isn't `vue-template-compiler` a peerDependency?
+
+Since this package is more often used as a low-level utility, it is usually a transitive dependency in an actual Vue project. It is therefore the responsibility of the higher-level package (e.g. `vue-loader`) to inject `vue-template-compiler` via options when calling the `parse` and `compileTemplate` methods.
+
+Not listing it as a peer depedency also allows tooling authors to use a non-default template compiler instead of `vue-template-compiler` without having to include it just to fullfil the peer dep requirement.
+
 ## API
 
 ### parse(ParseOptions): SFCDescriptor
 
-Parse raw single file component source into a descriptor with source maps.
+Parse raw single file component source into a descriptor with source maps. The actual compiler (`vue-template-compiler`) must be passed in via the `compiler` option so that the specific version used can be determined by the end user.
 
 ``` ts
 interface ParseOptions {
   source: string
   filename?: string
+  compiler: VueTemplateCompiler
+  // https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#compilerparsecomponentfile-options
+  // defualt: { pad: 'line' }
+  compilerParseOptions?: VueTemplateCompilerParseOptions
   sourceRoot?: string
   needMap?: boolean
 }
@@ -46,7 +56,7 @@ interface SFCBlock extends SFCCustomBlock {
 
 ### compileTemplate(TemplateCompileOptions): TemplateCompileResults
 
-Takes raw template source and compile it into JavaScript code. The actual compiler (`vue-template-compiler`) must be passed so that the specific version used can be determined by the end user.
+Takes raw template source and compile it into JavaScript code. The actual compiler (`vue-template-compiler`) must be passed in via the `compiler` option so that the specific version used can be determined by the end user.
 
 It can also optionally perform pre-processing for any templating engine supported by [consolidate](https://github.com/tj/consolidate.js/).
 
@@ -55,8 +65,9 @@ interface TemplateCompileOptions {
   source: string
   filename: string
 
-  // See https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler
   compiler: VueTemplateCompiler
+  https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#compilercompiletemplate-options
+  // default: {}
   compilerOptions?: VueTemplateCompilerOptions
 
   // Template preprocessor

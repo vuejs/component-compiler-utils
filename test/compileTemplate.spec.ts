@@ -11,6 +11,7 @@ test('preprocess pug', () => {
       ' div.container\n' +
       '   p Cool Pug example!\n' +
       '</template>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).template
@@ -30,6 +31,7 @@ test('warn missing preprocessor', () => {
     source:
       '<template lang="unknownLang">\n' +
       '</template>\n',
+    compiler,
     filename: 'example.vue',
     needMap: true
   }).template
