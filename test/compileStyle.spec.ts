@@ -127,7 +127,7 @@ test('custom postcss options', () => {
     postcssOptions: { random: 'foo' }
   })
 
-  expect((result.rawResult).opts.random).toBe('foo')
+  expect((result.rawResult as any).opts.random).toBe('foo')
 })
 
 test('async postcss plugin in sync mode', () => {
