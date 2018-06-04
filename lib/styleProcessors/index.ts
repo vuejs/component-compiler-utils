@@ -128,5 +128,6 @@ export const processors: { [key: string]: StylePreprocessor } = {
   less,
   sass,
   scss,
-  styl
+  styl,
+  stylus: styl
 }
