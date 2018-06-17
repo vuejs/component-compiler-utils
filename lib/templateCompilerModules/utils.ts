@@ -26,7 +26,7 @@ export function urlToRequire(url: string): string {
       ? (returnValue = `require("${url}")`)
       : // support uri fragment case by excluding it from
         // the require and instead appending it as string;
-        // assuming that teh path part is sufficient according to
+        // assuming that the path part is sufficient according to
         // the above caseing(t.i. no protocol-auth-host parts expected)
         (returnValue = `require("${uriParts.path}") + "${uriParts.hash}"`)
   }
@@ -34,7 +34,7 @@ export function urlToRequire(url: string): string {
 }
 
 /**
- * vuejs/component-compiler-utils#TBD Support uri fragment in transformed require
+ * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  * @param urlString an url as a string
  */
 function parseUriParts(urlString: string): UrlWithStringQuery {

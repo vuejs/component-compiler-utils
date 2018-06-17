@@ -47,7 +47,7 @@ test('preprocess pug', () => {
 })
 
 /**
- * vuejs/component-compiler-utils#TBD Support uri fragment in transformed require
+ * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  */
 test('supports uri fragment in transformed require', () => {
   const source = //
@@ -69,7 +69,7 @@ test('supports uri fragment in transformed require', () => {
 })
 
 /**
- * vuejs/component-compiler-utils#TBD Support uri fragment in transformed require
+ * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  */
 test('when too short uri then empty require', () => {
   const source = //
