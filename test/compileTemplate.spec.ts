@@ -47,38 +47,40 @@ test('preprocess pug', () => {
 })
 
 /**
- * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
+ * vuejs/component-compiler-utils#TBD Support uri fragment in transformed require
  */
 test('supports uri fragment in transformed require', () => {
   const source = //
-  '<svg>\
+    '<svg>\
     <use href="~@svg/file.svg#fragment"></use>\
   </svg>'
   const result = compileTemplate({
     filename: 'svgparticle.html',
     source: source,
     transformAssetUrls: {
-      "use": "href"
+      use: 'href'
     },
     compiler: compiler
   })
   expect(result.errors.length).toBe(0)
-  expect(result.code).toMatch(/href: require\("@svg\/file.svg"\) \+ "#fragment"/)
+  expect(result.code).toMatch(
+    /href: require\("@svg\/file.svg"\) \+ "#fragment"/
+  )
 })
 
 /**
- * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
+ * vuejs/component-compiler-utils#TBD Support uri fragment in transformed require
  */
 test('when too short uri then empty require', () => {
   const source = //
-  '<svg>\
+    '<svg>\
     <use href="~"></use>\
   </svg>'
   const result = compileTemplate({
     filename: 'svgparticle.html',
     source: source,
     transformAssetUrls: {
-      "use": "href"
+      use: 'href'
     },
     compiler: compiler
   })
