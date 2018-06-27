@@ -74,7 +74,7 @@ const less = {
     let error: Error | null = null
     nodeLess.render(
       source,
-      { syncImport: true },
+      Object.assign({}, options, { syncImport: true }),
       (err: Error | null, output: any) => {
         error = err
         result = output
