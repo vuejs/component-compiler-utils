@@ -149,10 +149,15 @@ function actuallyCompile (
     // transpile code with vue-template-es2015-compiler, which is a forked
     // version of Buble that applies ES2015 transforms + stripping `with` usage
     let code = transpile(
-      `var render = ${toFunction(render)}\n` +
-      `var staticRenderFns = [${staticRenderFns.map(toFunction)}]`,
+      `var __render__ = ${toFunction(render)}\n` +
+      `var __staticRenderFns__ = [${staticRenderFns.map(toFunction)}]`,
       finalTranspileOptions
     ) + `\n`
+
+    // #23 we use __render__ to avoid `render` not being prefixed by the
+    // transpiler when stripping with, but revert it back to `render` to
+    // maintain backwards compat
+    code = code.replace(/\s__(render|staticRenderFns)__\s/g, ' $1 ')
 
     if (!isProduction) {
       // mark with stripped (this enables Vue to use correct runtime proxy
