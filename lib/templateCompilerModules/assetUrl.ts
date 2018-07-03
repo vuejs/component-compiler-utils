@@ -25,7 +25,7 @@ export default (userOptions?: AssetURLOptions) => {
   }
 }
 
-function transform (node: ASTNode, options: AssetURLOptions) {
+function transform(node: ASTNode, options: AssetURLOptions) {
   for (const tag in options) {
     if ((tag === '*' || node.tag === tag) && node.attrs) {
       const attributes = options[tag]
@@ -38,7 +38,7 @@ function transform (node: ASTNode, options: AssetURLOptions) {
   }
 }
 
-function rewrite (attr: Attr, name: string) {
+function rewrite(attr: Attr, name: string) {
   if (attr.name === name) {
     const value = attr.value
     // only transform static URLs

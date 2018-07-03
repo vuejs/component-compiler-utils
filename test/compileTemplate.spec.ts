@@ -48,9 +48,7 @@ test('preprocess pug', () => {
 
 test('warn missing preprocessor', () => {
   const template = parse({
-    source:
-      '<template lang="unknownLang">\n' +
-      '</template>\n',
+    source: '<template lang="unknownLang">\n' + '</template>\n',
     compiler,
     filename: 'example.vue',
     needMap: true

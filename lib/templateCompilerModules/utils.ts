@@ -8,7 +8,7 @@ export interface ASTNode {
   attrs: Attr[]
 }
 
-export function urlToRequire (url: string): string {
+export function urlToRequire(url: string): string {
   // same logic as in transform-require.js
   const firstChar = url.charAt(0)
   if (firstChar === '.' || firstChar === '~' || firstChar === '@') {

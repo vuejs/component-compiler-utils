@@ -1,23 +1,20 @@
 import { SFCDescriptor } from './parse'
 
 export interface StartOfSourceMap {
-  file?: string;
-  sourceRoot?: string;
+  file?: string
+  sourceRoot?: string
 }
 
 export interface RawSourceMap extends StartOfSourceMap {
-  version: string;
-  sources: string[];
-  names: string[];
-  sourcesContent?: string[];
-  mappings: string;
+  version: string
+  sources: string[]
+  names: string[]
+  sourcesContent?: string[]
+  mappings: string
 }
 
 export interface VueTemplateCompiler {
-  parseComponent(
-    source: string,
-    options?: any
-  ): SFCDescriptor
+  parseComponent(source: string, options?: any): SFCDescriptor
 
   compile(
     template: string,

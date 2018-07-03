@@ -136,12 +136,13 @@ test('async postcss plugin in sync mode', () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+    postcssPlugins: [
+      require('postcss').plugin('test-plugin', () => async result => result)
+    ]
   })
 
   expect(result.errors).toHaveLength(1)
 })
-
 
 test('async postcss plugin', async () => {
   const promise = compileStyleAsync({
@@ -149,7 +150,9 @@ test('async postcss plugin', async () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    postcssPlugins: [require('postcss').plugin('test-plugin', () => async (result) => result)]
+    postcssPlugins: [
+      require('postcss').plugin('test-plugin', () => async result => result)
+    ]
   })
 
   expect(promise instanceof Promise).toBe(true)

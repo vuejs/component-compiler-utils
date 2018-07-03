@@ -1,9 +1,4 @@
-import {
-  parse,
-  SFCBlock,
-  SFCCustomBlock,
-  SFCDescriptor
-} from './parse'
+import { parse, SFCBlock, SFCCustomBlock, SFCDescriptor } from './parse'
 
 import {
   compileTemplate,
@@ -19,12 +14,7 @@ import {
 } from './compileStyle'
 
 // API
-export {
-  parse,
-  compileTemplate,
-  compileStyle,
-  compileStyleAsync
-}
+export { parse, compileTemplate, compileStyle, compileStyleAsync }
 
 // types
 export {

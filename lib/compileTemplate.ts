@@ -1,9 +1,8 @@
-import {
-  VueTemplateCompiler,
-  VueTemplateCompilerOptions
-} from './types'
+import { VueTemplateCompiler, VueTemplateCompilerOptions } from './types'
 
-import assetUrlsModule, { AssetURLOptions } from './templateCompilerModules/assetUrl'
+import assetUrlsModule, {
+  AssetURLOptions
+} from './templateCompilerModules/assetUrl'
 import srcsetModule from './templateCompilerModules/srcset'
 
 const prettier = require('prettier')
@@ -31,43 +30,49 @@ export interface TemplateCompileResult {
   errors: string[]
 }
 
-export function compileTemplate (
+export function compileTemplate(
   options: TemplateCompileOptions
 ): TemplateCompileResult {
   const { preprocessLang } = options
   const preprocessor = preprocessLang && consolidate[preprocessLang]
   if (preprocessor) {
-    return actuallyCompile(Object.assign({}, options, {
-      source: preprocess(options, preprocessor)
-    }))
+    return actuallyCompile(
+      Object.assign({}, options, {
+        source: preprocess(options, preprocessor)
+      })
+    )
   } else if (preprocessLang) {
     return {
-      code: (
-        `var render = function () {}\n` +
-        `var staticRenderFns = []\n`
-      ),
+      code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source: options.source,
-      tips: [`Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`],
-      errors: [`Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`]
-    };
+      tips: [
+        `Component ${
+          options.filename
+        } uses lang ${preprocessLang} for template. Please install the language preprocessor.`
+      ],
+      errors: [
+        `Component ${
+          options.filename
+        } uses lang ${preprocessLang} for template, however it is not installed.`
+      ]
+    }
   } else {
     return actuallyCompile(options)
   }
 }
 
-function preprocess (
+function preprocess(
   options: TemplateCompileOptions,
   preprocessor: any
 ): string {
-  const {
-    source,
-    filename,
-    preprocessOptions
-  } = options
+  const { source, filename, preprocessOptions } = options
 
-  const finalPreprocessOptions = Object.assign({
-    filename
-  }, preprocessOptions)
+  const finalPreprocessOptions = Object.assign(
+    {
+      filename
+    },
+    preprocessOptions
+  )
 
   // Consolidate exposes a callback based API, but the callback is in fact
   // called synchronously for most templating engines. In our case, we have to
@@ -87,7 +92,7 @@ function preprocess (
   return res
 }
 
-function actuallyCompile (
+function actuallyCompile(
   options: TemplateCompileOptions
 ): TemplateCompileResult {
   const {
@@ -101,9 +106,8 @@ function actuallyCompile (
     optimizeSSR = false
   } = options
 
-  const compile = optimizeSSR && compiler.ssrCompile
-    ? compiler.ssrCompile
-    : compiler.compile
+  const compile =
+    optimizeSSR && compiler.ssrCompile ? compiler.ssrCompile : compiler.compile
 
   let finalCompilerOptions = compilerOptions
   if (transformAssetUrls) {
@@ -114,23 +118,18 @@ function actuallyCompile (
       srcsetModule()
     ]
     finalCompilerOptions = Object.assign({}, compilerOptions, {
-      modules: [...builtInModules, ...compilerOptions.modules || []]
+      modules: [...builtInModules, ...(compilerOptions.modules || [])]
     })
   }
 
-  const {
-    render,
-    staticRenderFns,
-    tips,
-    errors
-  } = compile(source, finalCompilerOptions)
+  const { render, staticRenderFns, tips, errors } = compile(
+    source,
+    finalCompilerOptions
+  )
 
   if (errors && errors.length) {
     return {
-      code: (
-        `var render = function () {}\n` +
-        `var staticRenderFns = []\n`
-      ),
+      code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source,
       tips,
       errors
@@ -148,11 +147,12 @@ function actuallyCompile (
 
     // transpile code with vue-template-es2015-compiler, which is a forked
     // version of Buble that applies ES2015 transforms + stripping `with` usage
-    let code = transpile(
-      `var __render__ = ${toFunction(render)}\n` +
-      `var __staticRenderFns__ = [${staticRenderFns.map(toFunction)}]`,
-      finalTranspileOptions
-    ) + `\n`
+    let code =
+      transpile(
+        `var __render__ = ${toFunction(render)}\n` +
+          `var __staticRenderFns__ = [${staticRenderFns.map(toFunction)}]`,
+        finalTranspileOptions
+      ) + `\n`
 
     // #23 we use __render__ to avoid `render` not being prefixed by the
     // transpiler when stripping with, but revert it back to `render` to

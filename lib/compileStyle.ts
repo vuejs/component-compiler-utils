@@ -2,7 +2,11 @@ const postcss = require('postcss')
 import { ProcessOptions, LazyResult } from 'postcss'
 import trimPlugin from './stylePlugins/trim'
 import scopedPlugin from './stylePlugins/scoped'
-import { processors, StylePreprocessor, StylePreprocessorResults } from './styleProcessors'
+import {
+  processors,
+  StylePreprocessor,
+  StylePreprocessorResults
+} from './styleProcessors'
 
 export interface StyleCompileOptions {
   source: string
@@ -28,19 +32,19 @@ export interface StyleCompileResults {
   errors: string[]
 }
 
-export function compileStyle (
+export function compileStyle(
   options: StyleCompileOptions
-): StyleCompileResults { 
+): StyleCompileResults {
   return doCompileStyle({ ...options, isAsync: false })
 }
 
-export function compileStyleAsync (
+export function compileStyleAsync(
   options: StyleCompileOptions
 ): Promise<StyleCompileResults> {
   return Promise.resolve(doCompileStyle({ ...options, isAsync: true }))
 }
 
-export function doCompileStyle (
+export function doCompileStyle(
   options: AsyncStyleCompileOptions
 ): StyleCompileResults {
   const {
@@ -89,18 +93,22 @@ export function doCompileStyle (
     // In async mode, return a promise.
     if (options.isAsync) {
       return result
-        .then((result: LazyResult): StyleCompileResults => ({
-          code: result.css || '',
-          map: result.map && result.map.toJSON(),
-          errors,
-          rawResult: result
-        }))
-        .catch((error: Error): StyleCompileResults => ({
-          code: '',
-          map: undefined,
-          errors: [...errors, error.message],
-          rawResult: undefined
-        }))
+        .then(
+          (result: LazyResult): StyleCompileResults => ({
+            code: result.css || '',
+            map: result.map && result.map.toJSON(),
+            errors,
+            rawResult: result
+          })
+        )
+        .catch(
+          (error: Error): StyleCompileResults => ({
+            code: '',
+            map: undefined,
+            errors: [...errors, error.message],
+            rawResult: undefined
+          })
+        )
     }
 
     // force synchronous transform (we know we only have sync plugins)
@@ -122,7 +130,14 @@ function preprocess(
   options: StyleCompileOptions,
   preprocessor: StylePreprocessor
 ): StylePreprocessorResults {
-  return preprocessor.render(options.source, options.map, Object.assign({
-    filename: options.filename
-  }, options.preprocessOptions))
+  return preprocessor.render(
+    options.source,
+    options.map,
+    Object.assign(
+      {
+        filename: options.filename
+      },
+      options.preprocessOptions
+    )
+  )
 }

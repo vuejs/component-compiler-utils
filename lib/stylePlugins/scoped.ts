@@ -7,7 +7,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
   const id: string = options
   const keyframes = Object.create(null)
 
-  root.each(function rewriteSelector (node: any) {
+  root.each(function rewriteSelector(node: any) {
     if (!node.selector) {
       // handle media queries
       if (node.type === 'atrule') {
@@ -43,9 +43,12 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
             node = n
           }
         })
-        selector.insertAfter(node, selectorParser.attribute({
-          attribute: id
-        }))
+        selector.insertAfter(
+          node,
+          selectorParser.attribute({
+            attribute: id
+          })
+        )
       })
     }).processSync(node.selector)
   })
@@ -58,13 +61,15 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
     root.walkDecls(decl => {
       // individual animation-name declaration
       if (/^(-\w+-)?animation-name$/.test(decl.prop)) {
-        decl.value = decl.value.split(',')
+        decl.value = decl.value
+          .split(',')
           .map(v => keyframes[v.trim()] || v.trim())
           .join(',')
       }
       // shorthand
       if (/^(-\w+-)?animation$/.test(decl.prop)) {
-        decl.value = decl.value.split(',')
+        decl.value = decl.value
+          .split(',')
           .map(v => {
             const vals = v.trim().split(/\s+/)
             const i = vals.findIndex(val => keyframes[val])

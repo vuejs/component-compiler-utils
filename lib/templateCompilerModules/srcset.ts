@@ -24,12 +24,11 @@ function transform(node: ASTNode) {
       if (attr.name === 'srcset') {
         // same logic as in transform-require.js
         const value = attr.value
-        const isStatic = value.charAt(0) === '"' && value.charAt(value.length - 1) === '"'
+        const isStatic =
+          value.charAt(0) === '"' && value.charAt(value.length - 1) === '"'
         if (!isStatic) {
           return
         }
-
-
 
         const imageCandidates: ImageCandidate[] = value
           .substr(1, value.length - 2)
@@ -37,7 +36,10 @@ function transform(node: ASTNode) {
           .map(s => {
             // The attribute value arrives here with all whitespace, except
             // normal spaces, represented by escape sequences
-            const [url, descriptor] = s.replace(escapedSpaceCharacters, ' ').trim().split(' ', 2)
+            const [url, descriptor] = s
+              .replace(escapedSpaceCharacters, ' ')
+              .trim()
+              .split(' ', 2)
             return { require: urlToRequire(url), descriptor }
           })
 
@@ -47,9 +49,15 @@ function transform(node: ASTNode) {
         // "require(url1), require(url2) 2x"
         // "require(url1) 1x, require(url2)"
         // "require(url1) 1x, require(url2) 2x"
-        const code = imageCandidates.map(
-          ({ require, descriptor }) => `${require} + "${descriptor ? ' ' + descriptor : ''}, " + `
-        ).join('').slice(0, -6).concat('"').replace(/ \+ ""$/, '')
+        const code = imageCandidates
+          .map(
+            ({ require, descriptor }) =>
+              `${require} + "${descriptor ? ' ' + descriptor : ''}, " + `
+          )
+          .join('')
+          .slice(0, -6)
+          .concat('"')
+          .replace(/ \+ ""$/, '')
 
         attr.value = code
       }
