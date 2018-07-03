@@ -1,3 +1,19 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/vuejs/component-compiler-utils/compare/v2.0.0...v2.1.0) (2018-07-03)
+
+
+### Bug Fixes
+
+* Forward preprocessor options to less ([#25](https://github.com/vuejs/component-compiler-utils/issues/25)) ([3b19c1e](https://github.com/vuejs/component-compiler-utils/commit/3b19c1e)), closes [#24](https://github.com/vuejs/component-compiler-utils/issues/24)
+* should work with variable named render (close [#23](https://github.com/vuejs/component-compiler-utils/issues/23)) ([273827b](https://github.com/vuejs/component-compiler-utils/commit/273827b))
+
+
+### Features
+
+* Support `stylus` as `<style>` lang ([#18](https://github.com/vuejs/component-compiler-utils/issues/18)) ([986084e](https://github.com/vuejs/component-compiler-utils/commit/986084e))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/vuejs/component-compiler-utils/compare/v1.3.1...v2.0.0) (2018-06-03)
 
