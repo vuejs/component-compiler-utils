@@ -22,7 +22,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
     }
     node.selector = selectorParser((selectors: any) => {
       selectors.each((selector: any) => {
-        let node = null
+        let node: any = null
         selector.each((n: any) => {
           // ">>>" combinator
           if (n.type === 'combinator' && n.value === '>>>') {
@@ -43,12 +43,15 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
             node = n
           }
         })
-        selector.insertAfter(
-          node,
-          selectorParser.attribute({
-            attribute: id
-          })
-        )
+        if (node) {
+          node.spaces.after = ''
+          selector.insertAfter(
+            node,
+            selectorParser.attribute({
+              attribute: id
+            })
+          )
+        }
       })
     }).processSync(node.selector)
   })
