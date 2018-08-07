@@ -1,3 +1,13 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/vuejs/component-compiler-utils/compare/v2.1.0...v2.1.1) (2018-08-07)
+
+
+### Bug Fixes
+
+* remove space after selector when inserting scoped attribute ([5b299ed](https://github.com/vuejs/component-compiler-utils/commit/5b299ed)), closes [vue-loader/#1370](https://github.com/vuejs/component-compiler-utils/issues/1370)
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/vuejs/component-compiler-utils/compare/v2.0.0...v2.1.0) (2018-07-03)
 
