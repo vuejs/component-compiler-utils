@@ -1,3 +1,13 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/vuejs/component-compiler-utils/compare/v2.1.1...v2.1.2) (2018-08-09)
+
+
+### Bug Fixes
+
+* pin prettier version ([5f138a6](https://github.com/vuejs/component-compiler-utils/commit/5f138a6))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/vuejs/component-compiler-utils/compare/v2.1.0...v2.1.1) (2018-08-07)
 
