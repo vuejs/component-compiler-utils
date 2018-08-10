@@ -45,13 +45,13 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
         })
         if (node) {
           node.spaces.after = ''
-          selector.insertAfter(
-            node,
-            selectorParser.attribute({
-              attribute: id
-            })
-          )
         }
+        selector.insertAfter(
+        node,
+        selectorParser.attribute({
+            attribute: id
+        })
+        )
       })
     }).processSync(node.selector)
   })
