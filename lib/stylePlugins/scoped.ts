@@ -49,7 +49,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
         selector.insertAfter(
         node,
         selectorParser.attribute({
-            attribute: id
+          attribute: id
         })
         )
       })
