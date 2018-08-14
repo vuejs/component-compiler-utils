@@ -10,7 +10,7 @@ export interface ASTNode {
 
 import { UrlWithStringQuery, parse as uriParse } from 'url'
 
-export function urlToRequire (url: string): string {
+export function urlToRequire(url: string): string {
   const returnValue = `"${url}"`
   // same logic as in transform-require.js
   const firstChar = url.charAt(0)
@@ -22,12 +22,12 @@ export function urlToRequire (url: string): string {
 
     const uriParts = parseUriParts(url)
 
-    if(!uriParts.hash) {
+    if (!uriParts.hash) {
       return `require("${url}")`
-    } else{
+    } else {
       // support uri fragment case by excluding it from
-      // the require and instead appending it as string; 
-      // assuming that the path part is sufficient according to 
+      // the require and instead appending it as string;
+      // assuming that the path part is sufficient according to
       // the above caseing(t.i. no protocol-auth-host parts expected)
       return `require("${uriParts.path}") + "${uriParts.hash}"`
     }
@@ -39,18 +39,17 @@ export function urlToRequire (url: string): string {
  * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  * @param urlString an url as a string
  */
-function parseUriParts(urlString: string): UrlWithStringQuery{
-    // initialize return value
-    const returnValue : UrlWithStringQuery = uriParse('');
-    if(urlString){
-      // A TypeError is thrown if urlString is not a string
-      // @see https://nodejs.org/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost 
-      if('string' === typeof urlString){
-        // check is an uri
-        // return uriParse(urlString) // take apart the uri
-      }
-      return uriParse(urlString) // take apart the uri
+function parseUriParts(urlString: string): UrlWithStringQuery {
+  // initialize return value
+  const returnValue: UrlWithStringQuery = uriParse('')
+  if (urlString) {
+    // A TypeError is thrown if urlString is not a string
+    // @see https://nodejs.org/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost
+    if ('string' === typeof urlString) {
+      // check is an uri
+      // return uriParse(urlString) // take apart the uri
     }
+    return uriParse(urlString) // take apart the uri
   }
   return returnValue
 }
