@@ -18,7 +18,7 @@ Not listing it as a peer depedency also allows tooling authors to use a non-defa
 
 Parse raw single file component source into a descriptor with source maps. The actual compiler (`vue-template-compiler`) must be passed in via the `compiler` option so that the specific version used can be determined by the end user.
 
-```ts
+``` ts
 interface ParseOptions {
   source: string
   filename?: string
@@ -60,7 +60,7 @@ Takes raw template source and compile it into JavaScript code. The actual compil
 
 It can also optionally perform pre-processing for any templating engine supported by [consolidate](https://github.com/tj/consolidate.js/).
 
-```ts
+``` ts
 interface TemplateCompileOptions {
   source: string
   filename: string
@@ -108,18 +108,9 @@ interface AssetURLOptions {
 
 The resulting JavaScript code will look like this:
 
-```js
-var render = function(h) {
-  /* ... */
-}
-var staticRenderFns = [
-  function(h) {
-    /* ... */
-  },
-  function(h) {
-    /* ... */
-  }
-]
+``` js
+var render = function (h) { /* ... */}
+var staticRenderFns = [function (h) { /* ... */}, function (h) { /* ... */}]
 ```
 
 It **does NOT** assume any module system. It is your responsibility to handle the exports, if needed.
@@ -128,7 +119,7 @@ It **does NOT** assume any module system. It is your responsibility to handle th
 
 Take input raw CSS and applies scoped CSS transform. It does NOT handle pre-processors. If the component doesn't use scoped CSS then this step can be skipped.
 
-```ts
+``` ts
 interface StyleCompileOptions {
   source: string
   filename: string
