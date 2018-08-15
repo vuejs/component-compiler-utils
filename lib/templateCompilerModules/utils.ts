@@ -47,9 +47,8 @@ function parseUriParts(urlString: string): UrlWithStringQuery {
     // @see https://nodejs.org/api/url.html#url_url_parse_urlstring_parsequerystring_slashesdenotehost
     if ('string' === typeof urlString) {
       // check is an uri
-      // return uriParse(urlString) // take apart the uri
+      return uriParse(urlString) // take apart the uri
     }
-    return uriParse(urlString) // take apart the uri
   }
   return returnValue
 }
