@@ -1,3 +1,13 @@
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/vuejs/component-compiler-utils/compare/v2.1.2...v2.2.0) (2018-08-16)
+
+
+### Features
+
+* **scoped-css:** support leading >>> or /deep/ in selectors ([1a3b5bb](https://github.com/vuejs/component-compiler-utils/commit/1a3b5bb))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/vuejs/component-compiler-utils/compare/v2.1.1...v2.1.2) (2018-08-09)
 
