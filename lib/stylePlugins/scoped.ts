@@ -23,11 +23,13 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
     node.selector = selectorParser((selectors: any) => {
       selectors.each((selector: any) => {
         let node: any = null
+        let hasDeep: boolean = false
         selector.each((n: any) => {
           // ">>>" combinator
           if (n.type === 'combinator' && n.value === '>>>') {
             n.value = ' '
             n.spaces.before = n.spaces.after = ''
+            hasDeep = true
             return false
           }
           // /deep/ alias for >>>, since >>> doesn't work in SASS
@@ -37,6 +39,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
               prev.remove()
             }
             n.remove()
+            hasDeep = true
             return false
           }
           if (n.type !== 'pseudo' && n.type !== 'combinator') {
@@ -47,6 +50,12 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
           node.spaces.after = ''
           selector.insertAfter(
             node,
+            selectorParser.attribute({
+              attribute: id
+            })
+          )
+        } else if (hasDeep) {
+          selector.prepend(
             selectorParser.attribute({
               attribute: id
             })
