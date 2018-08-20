@@ -2,6 +2,19 @@ import { parse } from '../lib/parse'
 import { compileTemplate } from '../lib/compileTemplate'
 import * as compiler from 'vue-template-compiler'
 
+import Vue from 'vue'
+
+afterEach(() => jest.resetAllMocks().resetModules())
+
+function mockRender(code, options = {}) {
+  eval(
+    `${code}; options.render = render; options.staticRenderFns = staticRenderFns`
+  )
+  const vm = new Vue(Object.assign({}, options))
+  vm.$mount()
+  return vm._vnode
+}
+
 test('should work', () => {
   const source = `<div><p>{{ render }}</p></div>`
 
@@ -62,4 +75,82 @@ test('warn missing preprocessor', () => {
   })
 
   expect(result.errors.length).toBe(1)
+})
+
+test('transform assetUrls', () => {
+  const source = `
+<div>
+  <img src="./logo.png">
+  <img src="~fixtures/logo.png">
+  <img src="~/fixtures/logo.png">
+</div>
+`
+  const result = compileTemplate({
+    compiler: compiler,
+    filename: 'example.vue',
+    source,
+    transformAssetUrls: true
+  })
+  expect(result.errors.length).toBe(0)
+
+  jest.mock('./logo.png', () => 'a', { virtual: true })
+  jest.mock('fixtures/logo.png', () => 'b', { virtual: true })
+
+  const vnode = mockRender(result.code)
+  expect(vnode.children[0].data.attrs.src).toBe('a')
+  expect(vnode.children[2].data.attrs.src).toBe('b')
+  expect(vnode.children[4].data.attrs.src).toBe('b')
+})
+
+test('transform srcset', () => {
+  // TODO:
+  const source = `
+<div>
+  <img src="./logo.png">
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+    <image xlink:href="./logo.png" />
+  </svg>
+  <img src="./logo.png" srcset="./logo.png">
+  <img src="./logo.png" srcset="./logo.png 2x">
+  <img src="./logo.png" srcset="./logo.png, ./logo.png 2x">
+  <img src="./logo.png" srcset="./logo.png 2x, ./logo.png">
+  <img src="./logo.png" srcset="./logo.png 2x, ./logo.png 3x">
+  <img src="./logo.png" srcset="./logo.png, ./logo.png 2x, ./logo.png 3x">
+  <img
+    src="./logo.png"
+    srcset="
+      ./logo.png 2x,
+      ./logo.png 3x
+  ">
+</div>
+`
+  const result = compileTemplate({
+    compiler: compiler,
+    filename: 'example.vue',
+    source,
+    transformAssetUrls: true
+  })
+  expect(result.errors.length).toBe(0)
+
+  jest.mock('./logo.png', () => 'test-url', { virtual: true })
+  const vnode = mockRender(result.code)
+
+  // img tag
+  expect(vnode.children[0].data.attrs.src).toBe('test-url')
+  // image tag (SVG)
+  expect(vnode.children[2].children[0].data.attrs['xlink:href']).toBe(
+    'test-url'
+  )
+
+  // image tag with srcset
+  expect(vnode.children[4].data.attrs.srcset).toBe('test-url')
+  expect(vnode.children[6].data.attrs.srcset).toBe('test-url 2x')
+  // image tag with multiline srcset
+  expect(vnode.children[8].data.attrs.srcset).toBe('test-url, test-url 2x')
+  expect(vnode.children[10].data.attrs.srcset).toBe('test-url 2x, test-url')
+  expect(vnode.children[12].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
+  expect(vnode.children[14].data.attrs.srcset).toBe(
+    'test-url, test-url 2x, test-url 3x'
+  )
+  expect(vnode.children[16].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
 })
