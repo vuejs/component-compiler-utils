@@ -31,8 +31,8 @@ interface ParseOptions {
 }
 
 interface SFCDescriptor {
-  template?: SFCBlock
-  script?: SFCBlock
+  template: SFCBlock | null
+  script: SFCBlock | null
   styles: SFCBlock[]
   customBlocks: SFCCustomBlock[]
 }
@@ -40,10 +40,10 @@ interface SFCDescriptor {
 interface SFCCustomBlock {
   type: string
   content: string
-  attrs: { [key: string]: string }
+  attrs: { [key: string]: string | true }
   start: number
   end: number
-  map: RawSourceMap
+  map?: RawSourceMap
 }
 
 interface SFCBlock extends SFCCustomBlock {
