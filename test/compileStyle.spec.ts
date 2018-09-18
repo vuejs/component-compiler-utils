@@ -161,3 +161,41 @@ test('async postcss plugin', async () => {
   expect(result.errors).toHaveLength(0)
   expect(result.code).toEqual(expect.stringContaining('color: red'))
 })
+
+test('media query', () => {
+  const result = compileStyle({
+    id: 'v-scope-xxx',
+    scoped: true,
+    filename: 'example.vue',
+    source: `
+@media print {
+  .foo {
+    color: #000;
+  }
+}`
+  })
+
+  expect(result.errors).toHaveLength(0)
+  expect(result.code).toContain(
+    '@media print {\n.foo[v-scope-xxx] {\n    color: #000;\n}\n}'
+  )
+})
+
+test('supports query', () => {
+  const result = compileStyle({
+    id: 'v-scope-xxx',
+    scoped: true,
+    filename: 'example.vue',
+    source: `
+@supports ( color: #000 ) {
+  .foo {
+    color: #000;
+  }
+}`
+  })
+
+  expect(result.errors).toHaveLength(0)
+  expect(result.code).toContain(
+    '@supports ( color: #000 ) {\n.foo[v-scope-xxx] {\n    color: #000;\n}\n}'
+  )
+})
