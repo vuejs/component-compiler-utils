@@ -102,3 +102,24 @@ h1 {
   // >>> combinator
   expect(style).toContain(`.foo p[v-scope-xxx] .bar {\n  color: red;\n}`)
 })
+
+test('pseudo element', () => {
+  const { code } = compileStyle({
+    source: '::selection { display: none; }',
+    filename: 'test.css',
+    id: 'test'
+  })
+
+  expect(code).toContain('[test]::selection {')
+})
+
+test('spaces before pseudo element', () => {
+  const { code } = compileStyle({
+    source: '.abc, ::selection { color: red; }',
+    filename: 'test.css',
+    id: 'test'
+  })
+
+  expect(code).toContain('.abc[test],')
+  expect(code).toContain('[test]::selection {')
+})
