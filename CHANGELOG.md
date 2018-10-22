@@ -1,3 +1,14 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/vuejs/component-compiler-utils/compare/v2.2.0...v2.3.0) (2018-10-22)
+
+
+### Bug Fixes
+
+* support standalone pseudo element selectors ([#33](https://github.com/vuejs/component-compiler-utils/issues/33)) ([d6cfbbf](https://github.com/vuejs/component-compiler-utils/commit/d6cfbbf))
+* Typings for SFCDescriptor and SFCCustomBlock ([#29](https://github.com/vuejs/component-compiler-utils/issues/29)) ([bb09115](https://github.com/vuejs/component-compiler-utils/commit/bb09115))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/vuejs/component-compiler-utils/compare/v2.1.2...v2.2.0) (2018-08-16)
 
