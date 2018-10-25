@@ -53,9 +53,18 @@ export function parse(options: ParseOptions): SFCDescriptor {
     needMap = true
   } = options
   const cacheKey = hash(filename + source)
-  let output: SFCDescriptor = cache.get(cacheKey)
-  if (output) return output
-  output = compiler.parseComponent(source, compilerParseOptions)
+  const cachedOutput: string = cache.get(cacheKey)
+  if (cachedOutput) {
+    try {
+      return JSON.parse(cachedOutput) as SFCDescriptor
+    } catch (_) {
+      // do nothing
+    }
+  }
+  const output: SFCDescriptor = compiler.parseComponent(
+    source,
+    compilerParseOptions
+  )
   if (needMap) {
     if (output.script && !output.script.src) {
       output.script.map = generateSourceMap(
@@ -78,7 +87,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
       })
     }
   }
-  cache.set(cacheKey, output)
+  cache.set(cacheKey, JSON.stringify(output))
   return output
 }
 
