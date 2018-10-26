@@ -26,16 +26,26 @@ export default (userOptions?: AssetURLOptions) => {
 }
 
 function transform(node: ASTNode, options: AssetURLOptions) {
+  if (node.__assetUrlTransformed) {
+    return
+  }
   for (const tag in options) {
-    if ((tag === '*' || node.tag === tag) && node.attrs) {
-      const attributes = options[tag]
+    if (tag === '*' || node.tag === tag) {
+      let attributes = options[tag]
       if (typeof attributes === 'string') {
-        node.attrs.some(attr => rewrite(attr, attributes))
-      } else if (Array.isArray(attributes)) {
-        attributes.forEach(item => node.attrs.some(attr => rewrite(attr, item)))
+        attributes = [attributes]
+      }
+      if (node.staticStyle && attributes.indexOf('style') > -1) {
+        node.staticStyle = rewriteStaticStyle(node.staticStyle)
+      }
+      if (node.attrs) {
+        attributes.filter(attr => attr !== 'style').forEach(attrName => {
+          node.attrs.some(attr => rewrite(attr, attrName))
+        })
       }
     }
   }
+  node.__assetUrlTransformed = true
 }
 
 function rewrite(attr: Attr, name: string) {
@@ -48,4 +58,42 @@ function rewrite(attr: Attr, name: string) {
     }
   }
   return false
+}
+
+function rewriteStaticStyle(style: string): string {
+  const styleObj = JSON.parse(style)
+
+  // A marker which won't appear in target string
+  let MARKER: string = Math.random()
+    .toString(16)
+    .slice(2, 10)
+  while (style.indexOf(MARKER) !== -1) {
+    MARKER = `$${MARKER}$`
+  }
+  let id = -1
+  const expressions: string[] = []
+
+  let result: string = JSON.stringify(styleObj, (key, value) => {
+    if (typeof value !== 'string') {
+      return value
+    }
+    let transformed: string = value.replace(
+      /url\((['"])?(.*?)\1\)/g,
+      (_0, _1, url) => {
+        // outer quotes would be added later
+        return `url(' + ${urlToRequire(url)} + ')`
+      }
+    )
+    if (transformed !== value) {
+      // add outer quotes
+      transformed = `'${transformed}'`
+      expressions.push(transformed)
+      id++
+      return MARKER + id
+    }
+    return value
+  })
+  const MARKER_RE = new RegExp(`"${MARKER}(\\d+)"`, 'g')
+  result = result.replace(MARKER_RE, (_, id) => expressions[id])
+  return result
 }

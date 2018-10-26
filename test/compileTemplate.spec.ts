@@ -101,6 +101,29 @@ test('when too short uri then empty require', () => {
   expect(result.code).toMatch(/href: require\(""\)/)
 })
 
+/**
+ * Support uri fragment in static style in transformed require
+ */
+test('supports uri fragment in static style transformed require', () => {
+  const source =
+    '<div>' +
+    '<img src="./image.jpg"/>' +
+    '<div style="color: yellow;background: #f00 url(./image/bg0.jpg) repeat"></div>' +
+    '<div style="background: url(./image/bg1.jpg), url(~@/image/bg2.jpg), url(http://vuejs.org/logo.png)"></div>' +
+    '</div>'
+  const result = compileTemplate({
+    filename: 'inline-style.html',
+    source: source,
+    transformAssetUrls: {
+      use: 'href',
+      '*': 'style'
+    },
+    compiler: compiler
+  })
+  expect(result.errors.length).toBe(0)
+  expect(result.code).toMatchSnapshot()
+})
+
 test('warn missing preprocessor', () => {
   const template = parse({
     source: '<template lang="unknownLang">\n' + '</template>\n',
