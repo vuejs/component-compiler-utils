@@ -3,3 +3,5 @@ jest.config.js
 tsconfig.json
 *.log
 *.lock
+.circleci
+coverage
