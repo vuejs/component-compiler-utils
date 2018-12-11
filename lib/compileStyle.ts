@@ -62,11 +62,11 @@ export function doCompileStyle(
   const source = preProcessedSource ? preProcessedSource.code : options.source
 
   const plugins = (postcssPlugins || []).slice()
-  if (scoped) {
-    plugins.unshift(scopedPlugin(id))
-  }
   if (trim) {
-    plugins.unshift(trimPlugin())
+    plugins.push(trimPlugin())
+  }
+  if (scoped) {
+    plugins.push(scopedPlugin(id))
   }
 
   const postCSSOptions: ProcessOptions = {
