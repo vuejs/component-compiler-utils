@@ -177,7 +177,7 @@ test('media query', () => {
 
   expect(result.errors).toHaveLength(0)
   expect(result.code).toContain(
-    '@media print {\n.foo[v-scope-xxx] {\n    color: #000;\n}\n}'
+    '@media print {.foo[v-scope-xxx] {\n    color: #000;}}'
   )
 })
 
@@ -196,6 +196,6 @@ test('supports query', () => {
 
   expect(result.errors).toHaveLength(0)
   expect(result.code).toContain(
-    '@supports ( color: #000 ) {\n.foo[v-scope-xxx] {\n    color: #000;\n}\n}'
+    '@supports ( color: #000 ) {.foo[v-scope-xxx] {\n    color: #000;}}'
   )
 })
