@@ -1,3 +1,14 @@
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/vuejs/component-compiler-utils/compare/v2.3.0...v2.3.1) (2018-12-11)
+
+
+### Bug Fixes
+
+* do not insert newline if style is already minified ([2603ee2](https://github.com/vuejs/component-compiler-utils/commit/2603ee2))
+* Move trim and scoped postcss plugins at the start of plugin list ([#36](https://github.com/vuejs/component-compiler-utils/issues/36)) ([0d52d86](https://github.com/vuejs/component-compiler-utils/commit/0d52d86))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/vuejs/component-compiler-utils/compare/v2.2.0...v2.3.0) (2018-10-22)
 
