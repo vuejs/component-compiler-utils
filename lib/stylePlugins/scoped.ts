@@ -26,18 +26,13 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
 
         selector.each((n: any) => {
           // ">>>" combinator
-          if (n.type === 'combinator' && n.value === '>>>') {
+          // and /deep/ alias for >>>, since >>> doesn't work in SASS
+          if (
+            n.type === 'combinator' &&
+            (n.value === '>>>' || n.value === '/deep/')
+          ) {
             n.value = ' '
             n.spaces.before = n.spaces.after = ''
-            return false
-          }
-          // /deep/ alias for >>>, since >>> doesn't work in SASS
-          if (n.type === 'tag' && n.value === '/deep/') {
-            const prev = n.prev()
-            if (prev && prev.type === 'combinator' && prev.value === ' ') {
-              prev.remove()
-            }
-            n.remove()
             return false
           }
           if (n.type !== 'pseudo' && n.type !== 'combinator') {

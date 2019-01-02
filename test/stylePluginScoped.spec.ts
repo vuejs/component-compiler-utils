@@ -72,7 +72,11 @@ h1 {
 }
 .foo p >>> .bar {
   color: red;
-}`
+}
+.foo div /deep/ .bar {
+  color: red;
+}
+`
   })
 
   expect(style).toContain(`.test[v-scope-xxx] {\n  color: yellow;\n}`)
@@ -101,6 +105,8 @@ h1 {
   expect(style).toContain(`@-webkit-keyframes opacity-v-scope-xxx {`)
   // >>> combinator
   expect(style).toContain(`.foo p[v-scope-xxx] .bar {\n  color: red;\n}`)
+  // /deep/ alias for >>>
+  expect(style).toContain(`.foo div[v-scope-xxx] .bar {\n  color: red;\n}`)
 })
 
 test('pseudo element', () => {
