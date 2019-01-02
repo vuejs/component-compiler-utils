@@ -5,7 +5,6 @@ import assetUrlsModule, {
 } from './templateCompilerModules/assetUrl'
 import srcsetModule from './templateCompilerModules/srcset'
 
-const prettier = require('prettier')
 const consolidate = require('consolidate')
 const transpile = require('vue-template-es2015-compiler')
 
@@ -21,6 +20,7 @@ export interface TemplateCompileOptions {
   isProduction?: boolean
   isFunctional?: boolean
   optimizeSSR?: boolean
+  prettify?: boolean
 }
 
 export interface TemplateCompileResult {
@@ -103,7 +103,8 @@ function actuallyCompile(
     transformAssetUrls,
     isProduction = process.env.NODE_ENV === 'production',
     isFunctional = false,
-    optimizeSSR = false
+    optimizeSSR = false,
+    prettify = true
   } = options
 
   const compile =
@@ -163,7 +164,13 @@ function actuallyCompile(
       // mark with stripped (this enables Vue to use correct runtime proxy
       // detection)
       code += `render._withStripped = true`
-      code = prettier.format(code, { semi: false, parser: 'babylon' })
+
+      if (prettify) {
+        code = require('prettier').format(code, {
+          semi: false,
+          parser: 'babylon'
+        })
+      }
     }
 
     return {
