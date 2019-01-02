@@ -20,7 +20,7 @@ export interface TemplateCompileOptions {
   isProduction?: boolean
   isFunctional?: boolean
   optimizeSSR?: boolean
-  formatCompiled?: boolean
+  prettify?: boolean
 }
 
 export interface TemplateCompileResult {
@@ -104,7 +104,7 @@ function actuallyCompile(
     isProduction = process.env.NODE_ENV === 'production',
     isFunctional = false,
     optimizeSSR = false,
-    formatCompiled = true
+    prettify = true
   } = options
 
   const compile =
@@ -165,7 +165,7 @@ function actuallyCompile(
       // detection)
       code += `render._withStripped = true`
 
-      if (formatCompiled) {
+      if (prettify) {
         code = require('prettier').format(code, {
           semi: false,
           parser: 'babylon'

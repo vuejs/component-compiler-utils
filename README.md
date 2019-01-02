@@ -91,9 +91,9 @@ interface TemplateCompileOptions {
   isFunctional?: boolean  // default: false
   optimizeSSR?: boolean   // default: false
 
-  // Whether prettifiy compiled render function or not (development only)
+  // Whether prettify compiled render function or not (development only)
   // default: true
-  formatCompiled?: boolean
+  prettify?: boolean
 }
 
 interface TemplateCompileResult {
