@@ -1,3 +1,26 @@
+# [2.4.0](https://github.com/vuejs/component-compiler-utils/compare/v2.0.0...v2.4.0) (2019-01-02)
+
+
+### Bug Fixes
+
+* do not insert newline if style is already minified ([2603ee2](https://github.com/vuejs/component-compiler-utils/commit/2603ee2))
+* Forward preprocessor options to less ([#25](https://github.com/vuejs/component-compiler-utils/issues/25)) ([3b19c1e](https://github.com/vuejs/component-compiler-utils/commit/3b19c1e)), closes [#24](https://github.com/vuejs/component-compiler-utils/issues/24)
+* Move trim and scoped postcss plugins at the start of plugin list ([#36](https://github.com/vuejs/component-compiler-utils/issues/36)) ([0d52d86](https://github.com/vuejs/component-compiler-utils/commit/0d52d86))
+* pin prettier version ([5f138a6](https://github.com/vuejs/component-compiler-utils/commit/5f138a6))
+* remove space after selector when inserting scoped attribute ([5b299ed](https://github.com/vuejs/component-compiler-utils/commit/5b299ed)), closes [vue-loader/#1370](https://github.com/vuejs/component-compiler-utils/issues/1370)
+* should work with variable named render (close [#23](https://github.com/vuejs/component-compiler-utils/issues/23)) ([273827b](https://github.com/vuejs/component-compiler-utils/commit/273827b))
+* support standalone pseudo element selectors ([#33](https://github.com/vuejs/component-compiler-utils/issues/33)) ([d6cfbbf](https://github.com/vuejs/component-compiler-utils/commit/d6cfbbf))
+* Typings for SFCDescriptor and SFCCustomBlock ([#29](https://github.com/vuejs/component-compiler-utils/issues/29)) ([bb09115](https://github.com/vuejs/component-compiler-utils/commit/bb09115))
+
+
+### Features
+
+* **scoped-css:** support leading >>> or /deep/ in selectors ([1a3b5bb](https://github.com/vuejs/component-compiler-utils/commit/1a3b5bb))
+* add `prettify ` option ([#42](https://github.com/vuejs/component-compiler-utils/issues/42)) ([db3655b](https://github.com/vuejs/component-compiler-utils/commit/db3655b))
+* Support `stylus` as `<style>` lang ([#18](https://github.com/vuejs/component-compiler-utils/issues/18)) ([986084e](https://github.com/vuejs/component-compiler-utils/commit/986084e))
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](https://github.com/vuejs/component-compiler-utils/compare/v2.3.0...v2.3.1) (2018-12-11)
 
