@@ -24,7 +24,7 @@ interface ParseOptions {
   filename?: string
   compiler: VueTemplateCompiler
   // https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#compilerparsecomponentfile-options
-  // defualt: { pad: 'line' }
+  // default: { pad: 'line' }
   compilerParseOptions?: VueTemplateCompilerParseOptions
   sourceRoot?: string
   needMap?: boolean
