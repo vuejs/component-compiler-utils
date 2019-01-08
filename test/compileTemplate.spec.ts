@@ -152,6 +152,10 @@ test('transform srcset', () => {
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
     <image xlink:href="./logo.png" />
   </svg>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+    <use xlink:href="./logo.png"/>
+  </svg>
+  </svg>
   <img src="./logo.png" srcset="./logo.png">
   <img src="./logo.png" srcset="./logo.png 2x">
   <img src="./logo.png" srcset="./logo.png, ./logo.png 2x">
@@ -183,16 +187,20 @@ test('transform srcset', () => {
   expect(vnode.children[2].children[0].data.attrs['xlink:href']).toBe(
     'test-url'
   )
+  // use tag (SVG)
+  expect(vnode.children[4].children[0].data.attrs['xlink:href']).toBe(
+    'test-url'
+  )
 
   // image tag with srcset
-  expect(vnode.children[4].data.attrs.srcset).toBe('test-url')
-  expect(vnode.children[6].data.attrs.srcset).toBe('test-url 2x')
+  expect(vnode.children[6].data.attrs.srcset).toBe('test-url')
+  expect(vnode.children[8].data.attrs.srcset).toBe('test-url 2x')
   // image tag with multiline srcset
-  expect(vnode.children[8].data.attrs.srcset).toBe('test-url, test-url 2x')
-  expect(vnode.children[10].data.attrs.srcset).toBe('test-url 2x, test-url')
-  expect(vnode.children[12].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
-  expect(vnode.children[14].data.attrs.srcset).toBe(
+  expect(vnode.children[10].data.attrs.srcset).toBe('test-url, test-url 2x')
+  expect(vnode.children[12].data.attrs.srcset).toBe('test-url 2x, test-url')
+  expect(vnode.children[14].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
+  expect(vnode.children[16].data.attrs.srcset).toBe(
     'test-url, test-url 2x, test-url 3x'
   )
-  expect(vnode.children[16].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
+  expect(vnode.children[18].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
 })

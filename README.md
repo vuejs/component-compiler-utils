@@ -81,6 +81,7 @@ interface TemplateCompileOptions {
   //   source: 'src',
   //   img: 'src',
   //   image: 'xlink:href'
+  //   use: 'xlink:href'
   // }
   transformAssetUrls?: AssetURLOptions | boolean
 
