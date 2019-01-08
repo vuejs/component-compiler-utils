@@ -1,3 +1,12 @@
+# [2.5.0](https://github.com/vuejs/component-compiler-utils/compare/v2.4.0...v2.5.0) (2019-01-08)
+
+
+### Features
+
+* add 'use' tag of SVG to 'transformAssetUrls' option as default ([#45](https://github.com/vuejs/component-compiler-utils/issues/45)) ([f4e3336](https://github.com/vuejs/component-compiler-utils/commit/f4e3336))
+
+
+
 # [2.4.0](https://github.com/vuejs/component-compiler-utils/compare/v2.0.0...v2.4.0) (2019-01-02)
 
 
