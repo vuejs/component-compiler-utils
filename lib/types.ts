@@ -32,16 +32,23 @@ export interface VueTemplateCompiler {
 // part of the vue monorepo.
 export interface VueTemplateCompilerOptions {
   modules?: Object[]
+  outputSourceRange?: boolean
 }
 
 export interface VueTemplateCompilerParseOptions {
   pad?: 'line' | 'space'
 }
 
+export interface ErrorWithRange {
+  msg: string
+  start: number
+  end: number
+}
+
 export interface VueTemplateCompilerResults {
   ast: Object | void
   render: string
   staticRenderFns: string[]
-  errors: string[]
-  tips: string[]
+  errors: (string | ErrorWithRange)[]
+  tips: (string | ErrorWithRange)[]
 }

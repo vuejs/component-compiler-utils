@@ -1,4 +1,8 @@
-import { VueTemplateCompiler, VueTemplateCompilerOptions } from './types'
+import {
+  VueTemplateCompiler,
+  VueTemplateCompilerOptions,
+  ErrorWithRange
+} from './types'
 
 import assetUrlsModule, {
   AssetURLOptions
@@ -26,8 +30,8 @@ export interface TemplateCompileOptions {
 export interface TemplateCompileResult {
   code: string
   source: string
-  tips: string[]
-  errors: string[]
+  tips: (string | ErrorWithRange)[]
+  errors: (string | ErrorWithRange)[]
 }
 
 export function compileTemplate(
