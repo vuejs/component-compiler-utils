@@ -49,7 +49,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
     filename = '',
     compiler,
     compilerParseOptions = { pad: 'line' },
-    sourceRoot = process.cwd(),
+    sourceRoot = '',
     needMap = true
   } = options
   const cacheKey = hash(filename + source)
@@ -89,8 +89,8 @@ function generateSourceMap(
   sourceRoot: string
 ): RawSourceMap {
   const map = new SourceMapGenerator({
-    file: filename,
-    sourceRoot
+    file: filename.replace(/\\/g, '/'),
+    sourceRoot: sourceRoot.replace(/\\/g, '/')
   })
   map.setSourceContent(filename, source)
   generated.split(splitRE).forEach((line, index) => {
