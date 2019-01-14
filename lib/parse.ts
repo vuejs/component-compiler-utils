@@ -1,3 +1,4 @@
+import { SourceMapGenerator } from 'source-map'
 import {
   RawSourceMap,
   VueTemplateCompiler,
@@ -6,7 +7,6 @@ import {
 
 const hash = require('hash-sum')
 const cache = require('lru-cache')(100)
-const { SourceMapGenerator } = require('source-map')
 
 const splitRE = /\r?\n/g
 const emptyRE = /^(?:\/\/)?\s*$/
@@ -48,7 +48,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
     source,
     filename = '',
     compiler,
-    compilerParseOptions = { pad: 'line' },
+    compilerParseOptions = { pad: 'line' } as VueTemplateCompilerParseOptions,
     sourceRoot = '',
     needMap = true
   } = options
@@ -62,7 +62,8 @@ export function parse(options: ParseOptions): SFCDescriptor {
         filename,
         source,
         output.script.content,
-        sourceRoot
+        sourceRoot,
+        compilerParseOptions.pad
       )
     }
     if (output.styles) {
@@ -72,7 +73,8 @@ export function parse(options: ParseOptions): SFCDescriptor {
             filename,
             source,
             style.content,
-            sourceRoot
+            sourceRoot,
+            compilerParseOptions.pad
           )
         }
       })
@@ -86,19 +88,28 @@ function generateSourceMap(
   filename: string,
   source: string,
   generated: string,
-  sourceRoot: string
+  sourceRoot: string,
+  pad?: 'line' | 'space'
 ): RawSourceMap {
   const map = new SourceMapGenerator({
     file: filename.replace(/\\/g, '/'),
     sourceRoot: sourceRoot.replace(/\\/g, '/')
   })
+  let offset = 0
+  if (!pad) {
+    offset =
+      source
+        .split(generated)
+        .shift()!
+        .split(splitRE).length - 1
+  }
   map.setSourceContent(filename, source)
   generated.split(splitRE).forEach((line, index) => {
     if (!emptyRE.test(line)) {
       map.addMapping({
         source: filename,
         original: {
-          line: index + 1,
+          line: index + 1 + offset,
           column: 0
         },
         generated: {
@@ -108,5 +119,5 @@ function generateSourceMap(
       })
     }
   })
-  return map.toJSON()
+  return JSON.parse(map.toString())
 }
