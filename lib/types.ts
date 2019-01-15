@@ -6,7 +6,7 @@ export interface StartOfSourceMap {
 }
 
 export interface RawSourceMap extends StartOfSourceMap {
-  version: number
+  version: string
   sources: string[]
   names: string[]
   sourcesContent?: string[]
