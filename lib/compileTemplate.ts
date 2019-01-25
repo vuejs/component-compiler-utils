@@ -172,7 +172,7 @@ function actuallyCompile(
       if (prettify) {
         code = require('prettier').format(code, {
           semi: false,
-          parser: 'babylon'
+          parser: 'babel'
         })
       }
     }
