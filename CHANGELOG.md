@@ -1,3 +1,12 @@
+## [2.5.1](https://github.com/vuejs/component-compiler-utils/compare/v2.5.0...v2.5.1) (2019-01-25)
+
+
+### Bug Fixes
+
+* fix sourceMap path separator on Windows, default sourceRoot to "" ([#51](https://github.com/vuejs/component-compiler-utils/issues/51)) ([df32cd9](https://github.com/vuejs/component-compiler-utils/commit/df32cd9)), closes [#47](https://github.com/vuejs/component-compiler-utils/issues/47)
+
+
+
 # [2.5.0](https://github.com/vuejs/component-compiler-utils/compare/v2.4.0...v2.5.0) (2019-01-08)
 
 
