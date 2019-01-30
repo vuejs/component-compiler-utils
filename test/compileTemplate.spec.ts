@@ -63,10 +63,9 @@ test('preprocess pug', () => {
  * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  */
 test('supports uri fragment in transformed require', () => {
-  const source = //
-    '<svg>\
+  const source = '<svg>\
     <use href="~@svg/file.svg#fragment"></use>\
-  </svg>'
+  </svg>' //
   const result = compileTemplate({
     filename: 'svgparticle.html',
     source: source,
@@ -85,10 +84,9 @@ test('supports uri fragment in transformed require', () => {
  * vuejs/component-compiler-utils#22 Support uri fragment in transformed require
  */
 test('when too short uri then empty require', () => {
-  const source = //
-    '<svg>\
+  const source = '<svg>\
     <use href="~"></use>\
-  </svg>'
+  </svg>' //
   const result = compileTemplate({
     filename: 'svgparticle.html',
     source: source,
