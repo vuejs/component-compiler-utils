@@ -59,7 +59,7 @@
     "postcss": "^7.0.7",
     "postcss-selector-parser": "^5.0.0",
     "prettier": "1.16.0",
-    "source-map": "^0.7.3",
+    "source-map": "~0.6.1",
     "vue-template-es2015-compiler": "^1.6.0"
   }
 }
