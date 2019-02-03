@@ -37,8 +37,8 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
             return false
           }
 
-          // in newer versions of sass, /deep/ support is also dropped, so add a ::v-deep alias
-          if (n.type === 'pseudo' && n.value === '::v-deep') {
+          // in newer versions of sass, /deep/ support is also dropped, so add a ::-v-deep alias
+          if (n.type === 'pseudo' && n.value === '::-v-deep') {
             n.value = n.spaces.before = n.spaces.after = ''
             return false
           }
