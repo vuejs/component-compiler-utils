@@ -77,7 +77,7 @@ h1 {
   color: red;
 }
 
-.foo span ::-v-deep .bar {
+.foo span ::v-deep .bar {
   color: red;
 }
 `
