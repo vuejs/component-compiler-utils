@@ -1,6 +1,7 @@
 import { parse } from '../lib/parse'
 import { compileStyle, compileStyleAsync } from '../lib/compileStyle'
 import * as compiler from 'vue-template-compiler'
+import { VueTemplateCompiler } from '../lib/types'
 
 test('preprocess less', () => {
   const style = parse({
@@ -9,7 +10,7 @@ test('preprocess less', () => {
       '@red: rgb(255, 0, 0);\n' +
       '.color { color: @red; }\n' +
       '</style>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -34,7 +35,7 @@ test('preprocess scss', () => {
       '$red: rgb(255, 0, 0);\n' +
       '.color { color: $red; }\n' +
       '</style>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -60,7 +61,7 @@ test('preprocess sass', () => {
       '.color\n' +
       '   color: $red\n' +
       '</style>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -86,7 +87,7 @@ test('preprocess stylus', () => {
       '.color\n' +
       '   color: red-color\n' +
       '</style>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
   }).styles[0]
@@ -137,7 +138,9 @@ test('async postcss plugin in sync mode', () => {
     source: '.foo { color: red }',
     scoped: false,
     postcssPlugins: [
-      require('postcss').plugin('test-plugin', () => async result => result)
+      require('postcss').plugin('test-plugin', () => async (result: any) =>
+        result
+      )
     ]
   })
 
@@ -151,7 +154,9 @@ test('async postcss plugin', async () => {
     source: '.foo { color: red }',
     scoped: false,
     postcssPlugins: [
-      require('postcss').plugin('test-plugin', () => async result => result)
+      require('postcss').plugin('test-plugin', () => async (result: any) =>
+        result
+      )
     ]
   })
 

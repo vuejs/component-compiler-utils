@@ -1,18 +1,19 @@
 import { parse } from '../lib/parse'
 import { compileTemplate } from '../lib/compileTemplate'
 import * as compiler from 'vue-template-compiler'
-
 import Vue from 'vue'
+
+import { VueTemplateCompiler } from '../lib/types'
 
 afterEach(() => jest.resetAllMocks().resetModules())
 
-function mockRender(code, options = {}) {
+function mockRender(code: string, options: any = {}) {
   eval(
     `${code}; options.render = render; options.staticRenderFns = staticRenderFns`
   )
   const vm = new Vue(Object.assign({}, options))
   vm.$mount()
-  return vm._vnode
+  return (vm as any)._vnode
 }
 
 test('should work', () => {
@@ -21,7 +22,7 @@ test('should work', () => {
   const result = compileTemplate({
     filename: 'example.vue',
     source,
-    compiler: compiler
+    compiler: compiler as VueTemplateCompiler
   })
 
   expect(result.errors.length).toBe(0)
@@ -44,16 +45,16 @@ test('preprocess pug', () => {
       ' div.container\n' +
       '   p Cool Pug example!\n' +
       '</template>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
-  }).template
+  }).template as compiler.SFCBlock
 
   const result = compileTemplate({
     filename: 'example.vue',
     source: template.content,
     preprocessLang: template.lang,
-    compiler: compiler
+    compiler: compiler as VueTemplateCompiler
   })
 
   expect(result.errors.length).toBe(0)
@@ -72,7 +73,7 @@ test('supports uri fragment in transformed require', () => {
     transformAssetUrls: {
       use: 'href'
     },
-    compiler: compiler
+    compiler: compiler as VueTemplateCompiler
   })
   expect(result.errors.length).toBe(0)
   expect(result.code).toMatch(
@@ -93,7 +94,7 @@ test('when too short uri then empty require', () => {
     transformAssetUrls: {
       use: 'href'
     },
-    compiler: compiler
+    compiler: compiler as VueTemplateCompiler
   })
   expect(result.errors.length).toBe(0)
   expect(result.code).toMatch(/href: require\(""\)/)
@@ -102,16 +103,16 @@ test('when too short uri then empty require', () => {
 test('warn missing preprocessor', () => {
   const template = parse({
     source: '<template lang="unknownLang">\n' + '</template>\n',
-    compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     needMap: true
-  }).template
+  }).template as compiler.SFCBlock
 
   const result = compileTemplate({
     filename: 'example.vue',
     source: template.content,
     preprocessLang: template.lang,
-    compiler: compiler
+    compiler: compiler as VueTemplateCompiler
   })
 
   expect(result.errors.length).toBe(1)
@@ -126,7 +127,7 @@ test('transform assetUrls', () => {
 </div>
 `
   const result = compileTemplate({
-    compiler: compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     source,
     transformAssetUrls: true
@@ -169,7 +170,7 @@ test('transform srcset', () => {
 </div>
 `
   const result = compileTemplate({
-    compiler: compiler,
+    compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     source,
     transformAssetUrls: true

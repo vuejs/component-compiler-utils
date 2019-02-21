@@ -39,16 +39,16 @@
     "@types/jest": "^22.2.3",
     "@types/node": "^10.12.20",
     "conventional-changelog-cli": "^2.0.11",
-    "jest": "^22.4.2",
+    "jest": "^24.0.0",
     "less": "^3.9.0",
     "lint-staged": "^8.1.1",
     "node-sass": "^4.11.0",
     "pug": "^2.0.3",
     "stylus": "^0.54.5",
-    "ts-jest": "^22.4.2",
-    "typescript": "^2.7.2",
-    "vue": "^2.5.22",
-    "vue-template-compiler": "^2.5.22",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.0",
+    "vue": "^2.6.6",
+    "vue-template-compiler": "^2.6.6",
     "yorkie": "^2.0.0"
   },
   "dependencies": {
@@ -60,6 +60,6 @@
     "postcss-selector-parser": "^5.0.0",
     "prettier": "1.16.3",
     "source-map": "~0.6.1",
-    "vue-template-es2015-compiler": "^1.8.2"
+    "vue-template-es2015-compiler": "^1.9.0"
   }
 }
