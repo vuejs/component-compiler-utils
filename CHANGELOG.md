@@ -1,3 +1,12 @@
+# [2.6.0](https://github.com/vuejs/component-compiler-utils/compare/v2.5.2...v2.6.0) (2019-02-21)
+
+
+### Features
+
+* implement ::v-deep as a shadow piercing combinator ([#54](https://github.com/vuejs/component-compiler-utils/issues/54)) ([8b2c646](https://github.com/vuejs/component-compiler-utils/commit/8b2c646))
+
+
+
 ## [2.5.2](https://github.com/vuejs/component-compiler-utils/compare/v2.5.0...v2.5.2) (2019-01-31)
 
 
