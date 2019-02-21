@@ -24,6 +24,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
       selectors.each((selector: any) => {
         let node: any = null
 
+        // find the last child node to insert attribute selector
         selector.each((n: any) => {
           // ">>>" combinator
           // and /deep/ alias for >>>, since >>> doesn't work in SASS
@@ -35,6 +36,13 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
             n.spaces.before = n.spaces.after = ''
             return false
           }
+
+          // in newer versions of sass, /deep/ support is also dropped, so add a ::v-deep alias
+          if (n.type === 'pseudo' && n.value === '::v-deep') {
+            n.value = n.spaces.before = n.spaces.after = ''
+            return false
+          }
+
           if (n.type !== 'pseudo' && n.type !== 'combinator') {
             node = n
           }
