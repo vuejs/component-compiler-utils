@@ -42,7 +42,7 @@ export function compileTemplate(
   if (preprocessor) {
     return actuallyCompile(
       Object.assign({}, options, {
-        source: preprocess(options, preprocessor)
+        source: preprocess(options, preprocessor, preprocessLang as string)
       })
     )
   } else if (preprocessLang) {
@@ -65,9 +65,16 @@ export function compileTemplate(
   }
 }
 
+function getDefaultPreprocessOptions(preprocessLang: string): any {
+  const defaultPreprocessOptions: any = { pug: { doctype: 'html' } }
+
+  return defaultPreprocessOptions[preprocessLang] || {}
+}
+
 function preprocess(
   options: TemplateCompileOptions,
-  preprocessor: any
+  preprocessor: any,
+  preprocessLang: string
 ): string {
   const { source, filename, preprocessOptions } = options
 
@@ -75,6 +82,7 @@ function preprocess(
     {
       filename
     },
+    getDefaultPreprocessOptions(preprocessLang),
     preprocessOptions
   )
 
