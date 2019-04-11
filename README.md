@@ -80,8 +80,8 @@ interface TemplateCompileOptions {
   //   video: ['src', 'poster'],
   //   source: 'src',
   //   img: 'src',
-  //   image: 'xlink:href'
-  //   use: 'xlink:href'
+  //   image: ['xlink:href', 'href'],
+  //   use: ['xlink:href', 'href']
   // }
   transformAssetUrls?: AssetURLOptions | boolean
 
