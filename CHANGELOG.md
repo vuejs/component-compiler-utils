@@ -1,3 +1,26 @@
+# [3.0.0](https://github.com/vuejs/component-compiler-utils/compare/v2.6.0...v3.0.0) (2019-04-11)
+
+
+### Features
+
+* Replace node-sass to sass ([#56](https://github.com/vuejs/component-compiler-utils/issues/56)) ([3e4e3fc](https://github.com/vuejs/component-compiler-utils/commit/3e4e3fc)), closes [#50](https://github.com/vuejs/component-compiler-utils/issues/50)
+
+
+### BREAKING CHANGES
+
+* Using `sass` instead of `node-sass` package.
+
+
+
+# [2.6.0](https://github.com/vuejs/component-compiler-utils/compare/v2.5.2...v2.6.0) (2019-02-21)
+
+
+### Features
+
+* implement ::v-deep as a shadow piercing combinator ([#54](https://github.com/vuejs/component-compiler-utils/issues/54)) ([8b2c646](https://github.com/vuejs/component-compiler-utils/commit/8b2c646))
+
+
+
 # [2.6.0](https://github.com/vuejs/component-compiler-utils/compare/v2.5.2...v2.6.0) (2019-02-21)
 
 
