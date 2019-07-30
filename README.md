@@ -66,7 +66,7 @@ interface TemplateCompileOptions {
   filename: string
 
   compiler: VueTemplateCompiler
-  https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#compilercompiletemplate-options
+  // https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#compilercompiletemplate-options
   // default: {}
   compilerOptions?: VueTemplateCompilerOptions
 
