@@ -98,6 +98,7 @@ interface TemplateCompileOptions {
 }
 
 interface TemplateCompileResult {
+  ast: Object | void
   code: string
   source: string
   tips: string[]

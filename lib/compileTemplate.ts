@@ -28,6 +28,7 @@ export interface TemplateCompileOptions {
 }
 
 export interface TemplateCompileResult {
+  ast: Object | void
   code: string
   source: string
   tips: (string | ErrorWithRange)[]
@@ -47,6 +48,7 @@ export function compileTemplate(
     )
   } else if (preprocessLang) {
     return {
+      ast: {},
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source: options.source,
       tips: [
@@ -127,13 +129,14 @@ function actuallyCompile(
     })
   }
 
-  const { render, staticRenderFns, tips, errors } = compile(
+  const { ast, render, staticRenderFns, tips, errors } = compile(
     source,
     finalCompilerOptions
   )
 
   if (errors && errors.length) {
     return {
+      ast,
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source,
       tips,
@@ -178,6 +181,7 @@ function actuallyCompile(
     }
 
     return {
+      ast,
       code,
       source,
       tips,

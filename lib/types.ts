@@ -33,6 +33,8 @@ export interface VueTemplateCompiler {
 export interface VueTemplateCompilerOptions {
   modules?: Object[]
   outputSourceRange?: boolean
+  whitespace?: 'preserve' | 'condense'
+  directives?: { [key: string]: Function }
 }
 
 export interface VueTemplateCompilerParseOptions {
