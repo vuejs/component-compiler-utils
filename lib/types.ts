@@ -48,7 +48,7 @@ export interface ErrorWithRange {
 }
 
 export interface VueTemplateCompilerResults {
-  ast: Object | void
+  ast: Object | undefined
   render: string
   staticRenderFns: string[]
   errors: (string | ErrorWithRange)[]

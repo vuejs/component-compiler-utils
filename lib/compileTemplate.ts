@@ -28,7 +28,7 @@ export interface TemplateCompileOptions {
 }
 
 export interface TemplateCompileResult {
-  ast: Object | void
+  ast: Object | undefined
   code: string
   source: string
   tips: (string | ErrorWithRange)[]
