@@ -57,7 +57,7 @@ test('preprocess sass', () => {
   const style = parse({
     source:
       '<style lang="sass">\n' +
-      '$red: rgb(255, 0, 0);\n' +
+      '$red: rgb(255, 0, 0)\n' +
       '.color\n' +
       '   color: $red\n' +
       '</style>\n',

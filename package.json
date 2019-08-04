@@ -1,6 +1,6 @@
 {
   "name": "@vue/component-compiler-utils",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "description": "Lower level utilities for compiling Vue single file components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -45,8 +45,8 @@
     "jest": "^24.0.0",
     "less": "^3.9.0",
     "lint-staged": "^8.1.1",
-    "node-sass": "^4.11.0",
     "pug": "^2.0.3",
+    "sass": "^1.17.3",
     "stylus": "^0.54.5",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.0",
