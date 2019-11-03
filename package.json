@@ -4,6 +4,9 @@
   "description": "Lower level utilities for compiling Vue single file components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "prettier --write \"{lib,test}/**/*.ts\"",
     "test": "prettier --list-different \"{lib,test}/**/*.ts\" && jest --coverage",
