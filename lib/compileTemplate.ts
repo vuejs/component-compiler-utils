@@ -170,10 +170,18 @@ function actuallyCompile(
       code += `render._withStripped = true`
 
       if (prettify) {
-        code = require('prettier').format(code, {
-          semi: false,
-          parser: 'babel'
-        })
+        try {
+          code = require('prettier').format(code, {
+            semi: false,
+            parser: 'babel'
+          })
+        } catch (e) {
+          tips.push(
+            `Failed to prettify component ${
+              options.filename
+            } template source after compilation.`
+          )
+        }
       }
     }
 
