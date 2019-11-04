@@ -50,14 +50,10 @@ export function compileTemplate(
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source: options.source,
       tips: [
-        `Component ${
-          options.filename
-        } uses lang ${preprocessLang} for template. Please install the language preprocessor.`
+        `Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`
       ],
       errors: [
-        `Component ${
-          options.filename
-        } uses lang ${preprocessLang} for template, however it is not installed.`
+        `Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`
       ]
     }
   } else {
@@ -177,9 +173,7 @@ function actuallyCompile(
           })
         } catch (e) {
           tips.push(
-            `Failed to prettify component ${
-              options.filename
-            } template source after compilation.`
+            `Failed to prettify component ${options.filename} template source after compilation.`
           )
         }
       }
