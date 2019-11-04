@@ -7,6 +7,7 @@ export interface AssetURLOptions {
 }
 
 const defaultOptions: AssetURLOptions = {
+  audio: 'src',
   video: ['src', 'poster'],
   source: 'src',
   img: 'src',
