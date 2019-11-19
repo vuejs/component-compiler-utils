@@ -119,7 +119,8 @@ function actuallyCompile(
       srcsetModule()
     ]
     finalCompilerOptions = Object.assign({}, compilerOptions, {
-      modules: [...builtInModules, ...(compilerOptions.modules || [])]
+      modules: [...builtInModules, ...(compilerOptions.modules || [])],
+      filename: options.filename
     })
   }
 
