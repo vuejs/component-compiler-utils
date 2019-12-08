@@ -1,3 +1,14 @@
+# [3.1.0](https://github.com/vuejs/component-compiler-utils/compare/v3.0.2...v3.1.0) (2019-12-08)
+
+
+### Features
+
+* include filename in `finalCompilerOptions` ([#74](https://github.com/vuejs/component-compiler-utils/issues/74)) ([3dda72d](https://github.com/vuejs/component-compiler-utils/commit/3dda72d))
+* support AST for template compile ([#68](https://github.com/vuejs/component-compiler-utils/issues/68)) ([ed44d6f](https://github.com/vuejs/component-compiler-utils/commit/ed44d6f))
+* support audio src in `transformAssetUrls` option by default ([#72](https://github.com/vuejs/component-compiler-utils/issues/72)) ([47f1341](https://github.com/vuejs/component-compiler-utils/commit/47f1341))
+
+
+
 ## [3.0.2](https://github.com/vuejs/component-compiler-utils/compare/v3.0.1...v3.0.2) (2019-11-06)
 
 
