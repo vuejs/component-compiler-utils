@@ -77,6 +77,7 @@ interface TemplateCompileOptions {
   // Transform asset urls found in the template into `require()` calls
   // This is off by default. If set to true, the default value is
   // {
+  //   audio: 'src',
   //   video: ['src', 'poster'],
   //   source: 'src',
   //   img: 'src',
