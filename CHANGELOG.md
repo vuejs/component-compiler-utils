@@ -1,3 +1,12 @@
+## [3.0.2](https://github.com/vuejs/component-compiler-utils/compare/v3.0.1...v3.0.2) (2019-11-06)
+
+
+### Bug Fixes
+
+* also include "lib" folder for type definitions ([dd42df1](https://github.com/vuejs/component-compiler-utils/commit/dd42df1)), closes [#73](https://github.com/vuejs/component-compiler-utils/issues/73)
+
+
+
 ## [3.0.1](https://github.com/vuejs/component-compiler-utils/compare/v3.0.0...v3.0.1) (2019-11-04)
 
 
