@@ -1,3 +1,21 @@
+## [3.0.2](https://github.com/vuejs/component-compiler-utils/compare/v3.0.1...v3.0.2) (2019-11-06)
+
+
+### Bug Fixes
+
+* also include "lib" folder for type definitions ([dd42df1](https://github.com/vuejs/component-compiler-utils/commit/dd42df1)), closes [#73](https://github.com/vuejs/component-compiler-utils/issues/73)
+
+
+
+## [3.0.1](https://github.com/vuejs/component-compiler-utils/compare/v3.0.0...v3.0.1) (2019-11-04)
+
+
+### Bug Fixes
+
+* should not crash when prettier failed ([89e7900](https://github.com/vuejs/component-compiler-utils/commit/89e7900))
+* unpin prettier version ([59a01bb](https://github.com/vuejs/component-compiler-utils/commit/59a01bb))
+
+
 # [3.0.0](https://github.com/vuejs/component-compiler-utils/compare/v2.6.0...v3.0.0) (2019-04-11)
 
 

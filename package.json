@@ -1,9 +1,13 @@
 {
   "name": "@vue/component-compiler-utils",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "Lower level utilities for compiling Vue single file components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "lint": "prettier --write \"{lib,test}/**/*.ts\"",
     "test": "prettier --list-different \"{lib,test}/**/*.ts\" && jest --coverage",
@@ -58,7 +62,7 @@
     "merge-source-map": "^1.1.0",
     "postcss": "^7.0.14",
     "postcss-selector-parser": "^5.0.0",
-    "prettier": "1.16.3",
+    "prettier": "^1.18.2",
     "source-map": "~0.6.1",
     "vue-template-es2015-compiler": "^1.9.0"
   }

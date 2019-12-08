@@ -52,14 +52,10 @@ export function compileTemplate(
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source: options.source,
       tips: [
-        `Component ${
-          options.filename
-        } uses lang ${preprocessLang} for template. Please install the language preprocessor.`
+        `Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`
       ],
       errors: [
-        `Component ${
-          options.filename
-        } uses lang ${preprocessLang} for template, however it is not installed.`
+        `Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`
       ]
     }
   } else {
@@ -125,7 +121,8 @@ function actuallyCompile(
       srcsetModule()
     ]
     finalCompilerOptions = Object.assign({}, compilerOptions, {
-      modules: [...builtInModules, ...(compilerOptions.modules || [])]
+      modules: [...builtInModules, ...(compilerOptions.modules || [])],
+      filename: options.filename
     })
   }
 
@@ -173,10 +170,16 @@ function actuallyCompile(
       code += `render._withStripped = true`
 
       if (prettify) {
-        code = require('prettier').format(code, {
-          semi: false,
-          parser: 'babel'
-        })
+        try {
+          code = require('prettier').format(code, {
+            semi: false,
+            parser: 'babel'
+          })
+        } catch (e) {
+          tips.push(
+            `Failed to prettify component ${options.filename} template source after compilation.`
+          )
+        }
       }
     }
 
