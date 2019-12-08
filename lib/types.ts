@@ -33,6 +33,8 @@ export interface VueTemplateCompiler {
 export interface VueTemplateCompilerOptions {
   modules?: Object[]
   outputSourceRange?: boolean
+  whitespace?: 'preserve' | 'condense'
+  directives?: { [key: string]: Function }
 }
 
 export interface VueTemplateCompilerParseOptions {
@@ -46,7 +48,7 @@ export interface ErrorWithRange {
 }
 
 export interface VueTemplateCompilerResults {
-  ast: Object | void
+  ast: Object | undefined
   render: string
   staticRenderFns: string[]
   errors: (string | ErrorWithRange)[]
