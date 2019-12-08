@@ -34,6 +34,7 @@ test('should work', () => {
   expect(result.code).toMatch(`render._withStripped = true`)
   // should prefix bindings
   expect(result.code).toMatch(`_vm.render`)
+  expect(result.ast).not.toBeUndefined()
 })
 
 test('preprocess pug', () => {
