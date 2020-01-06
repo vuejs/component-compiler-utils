@@ -1,3 +1,9 @@
+## [3.1.1](https://github.com/vuejs/component-compiler-utils/compare/v3.1.0...v3.1.1) (2020-01-06)
+
+### Bug Fixes
+
+* upgrade postcss-selector-parser to ^6.0.2 ([#76](https://github.com/vuejs/component-compiler-utils/pull/76)) ([e566a19](https://github.com/vuejs/component-compiler-utils/commit/e566a19))
+
 # [3.1.0](https://github.com/vuejs/component-compiler-utils/compare/v3.0.2...v3.1.0) (2019-12-08)
 
 
