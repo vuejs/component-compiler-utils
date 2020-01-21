@@ -53,13 +53,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
     needMap = true
   } = options
   const cacheKey = hash(
-    filename +
-      source +
-      JSON.stringify(
-        Object.entries(compilerParseOptions).sort(([key1], [key2]) =>
-          key1.localeCompare(key2)
-        )
-      )
+    filename + source + JSON.stringify(compilerParseOptions)
   )
   let output: SFCDescriptor = cache.get(cacheKey)
   if (output) return output
