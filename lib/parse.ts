@@ -6,7 +6,7 @@ import {
 } from './types'
 
 const hash = require('hash-sum')
-const cache = require('lru-cache')(100)
+const cache = new (require('lru-cache'))(100)
 
 const splitRE = /\r?\n/g
 const emptyRE = /^(?:\/\/)?\s*$/
