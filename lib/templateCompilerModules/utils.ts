@@ -6,6 +6,8 @@ export interface Attr {
 export interface ASTNode {
   tag: string
   attrs: Attr[]
+  staticStyle?: string
+  __assetUrlTransformed?: boolean
 }
 
 import { UrlWithStringQuery, parse as uriParse } from 'url'

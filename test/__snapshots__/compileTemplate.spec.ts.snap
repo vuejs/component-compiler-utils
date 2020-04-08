@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`supports uri fragment in static style transformed require 1`] = `
+"var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(\\"div\\", [
+    _c(\\"img\\", { attrs: { src: require(\\"./image.jpg\\") } }),
+    _c(\\"div\\", {
+      staticStyle: {
+        color: \\"yellow\\",
+        background: \\"#f00 url(\\" + require(\\"./image/bg0.jpg\\") + \\") repeat\\"
+      }
+    }),
+    _c(\\"div\\", {
+      staticStyle: {
+        background:
+          \\"url(\\" +
+          require(\\"./image/bg1.jpg\\") +
+          \\"), url(\\" +
+          require(\\"@/image/bg2.jpg\\") +
+          \\"), url(\\" +
+          \\"http://vuejs.org/logo.png\\" +
+          \\")\\"
+      }
+    })
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+"
+`;
