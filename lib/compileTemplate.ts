@@ -176,6 +176,12 @@ function actuallyCompile(
             parser: 'babel'
           })
         } catch (e) {
+          if (e.code === 'MODULE_NOT_FOUND') {
+            tips.push(
+              'The `prettify` option is on, but the dependency `prettier` is not found.\n' +
+                'Please either turn off `prettify` or manually install `prettier`.'
+            )
+          }
           tips.push(
             `Failed to prettify component ${options.filename} template source after compilation.`
           )
