@@ -3,14 +3,14 @@ import { parse, SFCBlock, SFCCustomBlock, SFCDescriptor } from './parse'
 import {
   compileTemplate,
   TemplateCompileOptions,
-  TemplateCompileResult
+  TemplateCompileResult,
 } from './compileTemplate'
 
 import {
   compileStyle,
   compileStyleAsync,
   StyleCompileOptions,
-  StyleCompileResults
+  StyleCompileResults,
 } from './compileStyle'
 
 // API
@@ -24,5 +24,5 @@ export {
   TemplateCompileOptions,
   TemplateCompileResult,
   StyleCompileOptions,
-  StyleCompileResults
+  StyleCompileResults,
 }

@@ -5,7 +5,7 @@ test('spaces after selector', () => {
   const { code } = compileStyle({
     source: `.foo , .bar { color: red; }`,
     filename: 'test.css',
-    id: 'test'
+    id: 'test',
   })
 
   expect(code).toMatch(`.foo[test], .bar[test] { color: red;`)
@@ -15,7 +15,7 @@ test('leading deep selector', () => {
   const { code } = compileStyle({
     source: `>>> .foo { color: red; }`,
     filename: 'test.css',
-    id: 'test'
+    id: 'test',
   })
 
   expect(code).toMatch(`[test] .foo { color: red;`)
@@ -80,7 +80,7 @@ h1 {
 .foo span ::v-deep .bar {
   color: red;
 }
-`
+`,
   })
 
   expect(style).toContain(`.test[v-scope-xxx] {\n  color: yellow;\n}`)
@@ -119,7 +119,7 @@ test('pseudo element', () => {
   const { code } = compileStyle({
     source: '::selection { display: none; }',
     filename: 'test.css',
-    id: 'test'
+    id: 'test',
   })
 
   expect(code).toContain('[test]::selection {')
@@ -129,7 +129,7 @@ test('spaces before pseudo element', () => {
   const { code } = compileStyle({
     source: '.abc, ::selection { color: red; }',
     filename: 'test.css',
-    id: 'test'
+    id: 'test',
   })
 
   expect(code).toContain('.abc[test],')

@@ -2,7 +2,7 @@ import { SourceMapGenerator } from 'source-map'
 import {
   RawSourceMap,
   VueTemplateCompiler,
-  VueTemplateCompilerParseOptions
+  VueTemplateCompilerParseOptions,
 } from './types'
 
 const hash = require('hash-sum')
@@ -50,7 +50,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
     compiler,
     compilerParseOptions = { pad: 'line' } as VueTemplateCompilerParseOptions,
     sourceRoot = '',
-    needMap = true
+    needMap = true,
   } = options
   const cacheKey = hash(
     filename + source + JSON.stringify(compilerParseOptions)
@@ -69,7 +69,7 @@ export function parse(options: ParseOptions): SFCDescriptor {
       )
     }
     if (output.styles) {
-      output.styles.forEach(style => {
+      output.styles.forEach((style) => {
         if (!style.src) {
           style.map = generateSourceMap(
             filename,
@@ -95,15 +95,11 @@ function generateSourceMap(
 ): RawSourceMap {
   const map = new SourceMapGenerator({
     file: filename.replace(/\\/g, '/'),
-    sourceRoot: sourceRoot.replace(/\\/g, '/')
+    sourceRoot: sourceRoot.replace(/\\/g, '/'),
   })
   let offset = 0
   if (!pad) {
-    offset =
-      source
-        .split(generated)
-        .shift()!
-        .split(splitRE).length - 1
+    offset = source.split(generated).shift()!.split(splitRE).length - 1
   }
   map.setSourceContent(filename, source)
   generated.split(splitRE).forEach((line, index) => {
@@ -112,12 +108,12 @@ function generateSourceMap(
         source: filename,
         original: {
           line: index + 1 + offset,
-          column: 0
+          column: 0,
         },
         generated: {
           line: index + 1,
-          column: 0
-        }
+          column: 0,
+        },
       })
     }
   })

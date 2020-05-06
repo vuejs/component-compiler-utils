@@ -12,7 +12,7 @@ test('preprocess less', () => {
       '</style>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).styles[0]
   const result = compileStyle({
     id: 'v-scope-xxx',
@@ -20,7 +20,7 @@ test('preprocess less', () => {
     source: style.content,
     map: style.map,
     scoped: false,
-    preprocessLang: style.lang
+    preprocessLang: style.lang,
   })
 
   expect(result.errors.length).toBe(0)
@@ -37,7 +37,7 @@ test('preprocess scss', () => {
       '</style>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).styles[0]
   const result = compileStyle({
     id: 'v-scope-xxx',
@@ -45,7 +45,7 @@ test('preprocess scss', () => {
     source: style.content,
     map: style.map,
     scoped: false,
-    preprocessLang: style.lang
+    preprocessLang: style.lang,
   })
 
   expect(result.errors.length).toBe(0)
@@ -63,7 +63,7 @@ test('preprocess sass', () => {
       '</style>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).styles[0]
   const result = compileStyle({
     id: 'v-scope-xxx',
@@ -71,7 +71,7 @@ test('preprocess sass', () => {
     source: style.content,
     map: style.map,
     scoped: false,
-    preprocessLang: style.lang
+    preprocessLang: style.lang,
   })
 
   expect(result.errors.length).toBe(0)
@@ -89,7 +89,7 @@ test('preprocess stylus', () => {
       '</style>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).styles[0]
   const result = compileStyle({
     id: 'v-scope-xxx',
@@ -97,7 +97,7 @@ test('preprocess stylus', () => {
     source: style.content,
     map: style.map,
     scoped: false,
-    preprocessLang: style.lang
+    preprocessLang: style.lang,
   })
 
   expect(result.errors.length).toBe(0)
@@ -113,7 +113,7 @@ test('custom postcss plugin', () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    postcssPlugins: [require('postcss').plugin('test-plugin', () => spy)()]
+    postcssPlugins: [require('postcss').plugin('test-plugin', () => spy)()],
   })
 
   expect(spy).toHaveBeenCalled()
@@ -125,7 +125,7 @@ test('custom postcss options', () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    postcssOptions: { random: 'foo' }
+    postcssOptions: { random: 'foo' },
   })
 
   expect((result.rawResult as any).opts.random).toBe('foo')
@@ -140,8 +140,8 @@ test('async postcss plugin in sync mode', () => {
     postcssPlugins: [
       require('postcss').plugin('test-plugin', () => async (result: any) =>
         result
-      )
-    ]
+      ),
+    ],
   })
 
   expect(result.errors).toHaveLength(1)
@@ -156,8 +156,8 @@ test('async postcss plugin', async () => {
     postcssPlugins: [
       require('postcss').plugin('test-plugin', () => async (result: any) =>
         result
-      )
-    ]
+      ),
+    ],
   })
 
   expect(promise instanceof Promise).toBe(true)
@@ -177,7 +177,7 @@ test('media query', () => {
   .foo {
     color: #000;
   }
-}`
+}`,
   })
 
   expect(result.errors).toHaveLength(0)
@@ -196,7 +196,7 @@ test('supports query', () => {
   .foo {
     color: #000;
   }
-}`
+}`,
   })
 
   expect(result.errors).toHaveLength(0)

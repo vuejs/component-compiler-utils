@@ -26,7 +26,7 @@ const scss: StylePreprocessor = {
       data: source,
       file: options.filename,
       outFile: options.filename,
-      sourceMap: !!map
+      sourceMap: !!map,
     })
 
     try {
@@ -36,7 +36,7 @@ const scss: StylePreprocessor = {
         return {
           code: result.css.toString(),
           map: merge(map, JSON.parse(result.map.toString())),
-          errors: []
+          errors: [],
         }
       }
 
@@ -44,7 +44,7 @@ const scss: StylePreprocessor = {
     } catch (e) {
       return { code: '', errors: [e] }
     }
-  }
+  },
 }
 
 const sass = {
@@ -58,7 +58,7 @@ const sass = {
       map,
       Object.assign({}, options, { indentedSyntax: true })
     )
-  }
+  },
 }
 
 // .less
@@ -87,12 +87,12 @@ const less = {
       return {
         code: result.css.toString(),
         map: merge(map, result.map),
-        errors: []
+        errors: [],
       }
     }
 
     return { code: result.css.toString(), errors: [] }
-  }
+  },
 }
 
 // .styl
@@ -105,7 +105,7 @@ const styl = {
     const nodeStylus = require('stylus')
     try {
       const ref = nodeStylus(source)
-      Object.keys(options).forEach(key => ref.set(key, options[key]))
+      Object.keys(options).forEach((key) => ref.set(key, options[key]))
       if (map) ref.set('sourcemap', { inline: false, comment: false })
 
       const result = ref.render()
@@ -113,7 +113,7 @@ const styl = {
         return {
           code: result,
           map: merge(map, ref.sourcemap),
-          errors: []
+          errors: [],
         }
       }
 
@@ -121,7 +121,7 @@ const styl = {
     } catch (e) {
       return { code: '', errors: [e] }
     }
-  }
+  },
 }
 
 export const processors: { [key: string]: StylePreprocessor } = {
@@ -129,5 +129,5 @@ export const processors: { [key: string]: StylePreprocessor } = {
   sass,
   scss,
   styl,
-  stylus: styl
+  stylus: styl,
 }

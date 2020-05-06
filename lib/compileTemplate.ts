@@ -1,11 +1,11 @@
 import {
   VueTemplateCompiler,
   VueTemplateCompilerOptions,
-  ErrorWithRange
+  ErrorWithRange,
 } from './types'
 
 import assetUrlsModule, {
-  AssetURLOptions
+  AssetURLOptions,
 } from './templateCompilerModules/assetUrl'
 import srcsetModule from './templateCompilerModules/srcset'
 
@@ -43,7 +43,7 @@ export function compileTemplate(
   if (preprocessor) {
     return actuallyCompile(
       Object.assign({}, options, {
-        source: preprocess(options, preprocessor)
+        source: preprocess(options, preprocessor),
       })
     )
   } else if (preprocessLang) {
@@ -52,11 +52,11 @@ export function compileTemplate(
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source: options.source,
       tips: [
-        `Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`
+        `Component ${options.filename} uses lang ${preprocessLang} for template. Please install the language preprocessor.`,
       ],
       errors: [
-        `Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`
-      ]
+        `Component ${options.filename} uses lang ${preprocessLang} for template, however it is not installed.`,
+      ],
     }
   } else {
     return actuallyCompile(options)
@@ -71,7 +71,7 @@ function preprocess(
 
   const finalPreprocessOptions = Object.assign(
     {
-      filename
+      filename,
     },
     preprocessOptions
   )
@@ -106,7 +106,7 @@ function actuallyCompile(
     isProduction = process.env.NODE_ENV === 'production',
     isFunctional = false,
     optimizeSSR = false,
-    prettify = true
+    prettify = true,
   } = options
 
   const compile =
@@ -118,11 +118,11 @@ function actuallyCompile(
       transformAssetUrls === true
         ? assetUrlsModule()
         : assetUrlsModule(transformAssetUrls),
-      srcsetModule()
+      srcsetModule(),
     ]
     finalCompilerOptions = Object.assign({}, compilerOptions, {
       modules: [...builtInModules, ...(compilerOptions.modules || [])],
-      filename: options.filename
+      filename: options.filename,
     })
   }
 
@@ -137,13 +137,13 @@ function actuallyCompile(
       code: `var render = function () {}\n` + `var staticRenderFns = []\n`,
       source,
       tips,
-      errors
+      errors,
     }
   } else {
     const finalTranspileOptions = Object.assign({}, transpileOptions, {
       transforms: Object.assign({}, transpileOptions.transforms, {
-        stripWithFunctional: isFunctional
-      })
+        stripWithFunctional: isFunctional,
+      }),
     })
 
     const toFunction = (code: string): string => {
@@ -173,7 +173,7 @@ function actuallyCompile(
         try {
           code = require('prettier').format(code, {
             semi: false,
-            parser: 'babel'
+            parser: 'babel',
           })
         } catch (e) {
           if (e.code === 'MODULE_NOT_FOUND') {
@@ -194,7 +194,7 @@ function actuallyCompile(
       code,
       source,
       tips,
-      errors
+      errors,
     }
   }
 }

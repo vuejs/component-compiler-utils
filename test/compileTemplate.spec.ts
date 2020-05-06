@@ -22,7 +22,7 @@ test('should work', () => {
   const result = compileTemplate({
     filename: 'example.vue',
     source,
-    compiler: compiler as VueTemplateCompiler
+    compiler: compiler as VueTemplateCompiler,
   })
 
   expect(result.errors.length).toBe(0)
@@ -48,14 +48,14 @@ test('preprocess pug', () => {
       '</template>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).template as compiler.SFCBlock
 
   const result = compileTemplate({
     filename: 'example.vue',
     source: template.content,
     preprocessLang: template.lang,
-    compiler: compiler as VueTemplateCompiler
+    compiler: compiler as VueTemplateCompiler,
   })
 
   expect(result.errors.length).toBe(0)
@@ -72,9 +72,9 @@ test('supports uri fragment in transformed require', () => {
     filename: 'svgparticle.html',
     source: source,
     transformAssetUrls: {
-      use: 'href'
+      use: 'href',
     },
-    compiler: compiler as VueTemplateCompiler
+    compiler: compiler as VueTemplateCompiler,
   })
   expect(result.errors.length).toBe(0)
   expect(result.code).toMatch(
@@ -93,9 +93,9 @@ test('when too short uri then empty require', () => {
     filename: 'svgparticle.html',
     source: source,
     transformAssetUrls: {
-      use: 'href'
+      use: 'href',
     },
-    compiler: compiler as VueTemplateCompiler
+    compiler: compiler as VueTemplateCompiler,
   })
   expect(result.errors.length).toBe(0)
   expect(result.code).toMatch(/href: require\(""\)/)
@@ -106,14 +106,14 @@ test('warn missing preprocessor', () => {
     source: '<template lang="unknownLang">\n' + '</template>\n',
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
-    needMap: true
+    needMap: true,
   }).template as compiler.SFCBlock
 
   const result = compileTemplate({
     filename: 'example.vue',
     source: template.content,
     preprocessLang: template.lang,
-    compiler: compiler as VueTemplateCompiler
+    compiler: compiler as VueTemplateCompiler,
   })
 
   expect(result.errors.length).toBe(1)
@@ -131,7 +131,7 @@ test('transform assetUrls', () => {
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     source,
-    transformAssetUrls: true
+    transformAssetUrls: true,
   })
   expect(result.errors.length).toBe(0)
 
@@ -174,7 +174,7 @@ test('transform srcset', () => {
     compiler: compiler as VueTemplateCompiler,
     filename: 'example.vue',
     source,
-    transformAssetUrls: true
+    transformAssetUrls: true,
   })
   expect(result.errors.length).toBe(0)
 

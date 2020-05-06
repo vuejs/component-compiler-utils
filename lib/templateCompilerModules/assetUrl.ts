@@ -12,7 +12,7 @@ const defaultOptions: AssetURLOptions = {
   source: 'src',
   img: 'src',
   image: ['xlink:href', 'href'],
-  use: ['xlink:href', 'href']
+  use: ['xlink:href', 'href'],
 }
 
 export default (userOptions?: AssetURLOptions) => {
@@ -23,7 +23,7 @@ export default (userOptions?: AssetURLOptions) => {
   return {
     postTransformNode: (node: ASTNode) => {
       transform(node, options)
-    }
+    },
   }
 }
 
@@ -32,9 +32,11 @@ function transform(node: ASTNode, options: AssetURLOptions) {
     if ((tag === '*' || node.tag === tag) && node.attrs) {
       const attributes = options[tag]
       if (typeof attributes === 'string') {
-        node.attrs.some(attr => rewrite(attr, attributes))
+        node.attrs.some((attr) => rewrite(attr, attributes))
       } else if (Array.isArray(attributes)) {
-        attributes.forEach(item => node.attrs.some(attr => rewrite(attr, item)))
+        attributes.forEach((item) =>
+          node.attrs.some((attr) => rewrite(attr, item))
+        )
       }
     }
   }

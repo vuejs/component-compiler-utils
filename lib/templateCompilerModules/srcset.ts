@@ -10,7 +10,7 @@ interface ImageCandidate {
 export default () => ({
   postTransformNode: (node: ASTNode) => {
     transform(node)
-  }
+  },
 })
 
 // http://w3c.github.io/html/semantics-embedded-content.html#ref-for-image-candidate-string-5
@@ -20,7 +20,7 @@ function transform(node: ASTNode) {
   const tags = ['img', 'source']
 
   if (tags.indexOf(node.tag) !== -1 && node.attrs) {
-    node.attrs.forEach(attr => {
+    node.attrs.forEach((attr) => {
       if (attr.name === 'srcset') {
         // same logic as in transform-require.js
         const value = attr.value
@@ -33,7 +33,7 @@ function transform(node: ASTNode) {
         const imageCandidates: ImageCandidate[] = value
           .substr(1, value.length - 2)
           .split(',')
-          .map(s => {
+          .map((s) => {
             // The attribute value arrives here with all whitespace, except
             // normal spaces, represented by escape sequences
             const [url, descriptor] = s

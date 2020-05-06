@@ -60,7 +60,7 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
         selector.insertAfter(
           node,
           selectorParser.attribute({
-            attribute: id
+            attribute: id,
           })
         )
       })
@@ -72,21 +72,21 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
   // Caveat: this only works for keyframes and animation rules in the same
   // <style> element.
   if (Object.keys(keyframes).length) {
-    root.walkDecls(decl => {
+    root.walkDecls((decl) => {
       // individual animation-name declaration
       if (/^(-\w+-)?animation-name$/.test(decl.prop)) {
         decl.value = decl.value
           .split(',')
-          .map(v => keyframes[v.trim()] || v.trim())
+          .map((v) => keyframes[v.trim()] || v.trim())
           .join(',')
       }
       // shorthand
       if (/^(-\w+-)?animation$/.test(decl.prop)) {
         decl.value = decl.value
           .split(',')
-          .map(v => {
+          .map((v) => {
             const vals = v.trim().split(/\s+/)
-            const i = vals.findIndex(val => keyframes[val])
+            const i = vals.findIndex((val) => keyframes[val])
             if (i !== -1) {
               vals.splice(i, 1, keyframes[vals[i]])
               return vals.join(' ')

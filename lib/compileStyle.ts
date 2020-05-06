@@ -5,7 +5,7 @@ import scopedPlugin from './stylePlugins/scoped'
 import {
   processors,
   StylePreprocessor,
-  StylePreprocessorResults
+  StylePreprocessorResults,
 } from './styleProcessors'
 
 export interface StyleCompileOptions {
@@ -54,7 +54,7 @@ export function doCompileStyle(
     trim = true,
     preprocessLang,
     postcssOptions,
-    postcssPlugins
+    postcssPlugins,
   } = options
   const preprocessor = preprocessLang && processors[preprocessLang]
   const preProcessedSource = preprocessor && preprocess(options, preprocessor)
@@ -72,13 +72,13 @@ export function doCompileStyle(
   const postCSSOptions: ProcessOptions = {
     ...postcssOptions,
     to: filename,
-    from: filename
+    from: filename,
   }
   if (map) {
     postCSSOptions.map = {
       inline: false,
       annotation: false,
-      prev: map
+      prev: map,
     }
   }
 
@@ -98,7 +98,7 @@ export function doCompileStyle(
             code: result.css || '',
             map: result.map && result.map.toJSON(),
             errors,
-            rawResult: result
+            rawResult: result,
           })
         )
         .catch(
@@ -106,7 +106,7 @@ export function doCompileStyle(
             code: '',
             map: undefined,
             errors: [...errors, error.message],
-            rawResult: undefined
+            rawResult: undefined,
           })
         )
     }
@@ -122,7 +122,7 @@ export function doCompileStyle(
     code: code || ``,
     map: outMap && outMap.toJSON(),
     errors,
-    rawResult: result
+    rawResult: result,
   }
 }
 
@@ -135,7 +135,7 @@ function preprocess(
     options.map,
     Object.assign(
       {
-        filename: options.filename
+        filename: options.filename,
       },
       options.preprocessOptions
     )
