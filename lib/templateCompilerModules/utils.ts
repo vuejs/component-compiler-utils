@@ -19,21 +19,18 @@ export function urlToRequire(
   const returnValue = `"${url}"`
   // same logic as in transform-require.js
   const firstChar = url.charAt(0)
+  if (firstChar === '~') {
+    const secondChar = url.charAt(1)
+    url = url.slice(secondChar === '/' ? 2 : 1)
+  }
+
   const uriParts = parseUriParts(url)
+
   if (transformAssetUrlsOption.base) {
     // explicit base - directly rewrite the url into absolute url
     // does not apply to absolute urls or urls that start with `@`
     // since they are aliases
     if (firstChar === '.' || firstChar === '~') {
-      console.log(
-        '====111111',
-        transformAssetUrlsOption.base,
-        (path.posix || path).join(
-          transformAssetUrlsOption.base,
-          uriParts.path + (uriParts.hash || '')
-        )
-      )
-
       // when packaged in the browser, path will be using the posix-
       // only version provided by rollup-plugin-node-builtins.
       return `"${(path.posix || path).join(
@@ -45,11 +42,6 @@ export function urlToRequire(
   }
 
   if (firstChar === '.' || firstChar === '~' || firstChar === '@') {
-    if (firstChar === '~') {
-      const secondChar = url.charAt(1)
-      url = url.slice(secondChar === '/' ? 2 : 1)
-    }
-
     if (!uriParts.hash) {
       return `require("${url}")`
     } else {
