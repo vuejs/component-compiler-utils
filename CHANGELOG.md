@@ -1,3 +1,12 @@
+# [3.2.0](https://github.com/vuejs/component-compiler-utils/compare/v3.1.2...v3.2.0) (2020-07-22)
+
+
+### Features
+
+* asset handling for support vite dev. ([#90](https://github.com/vuejs/component-compiler-utils/issues/90)) ([ad83bdf](https://github.com/vuejs/component-compiler-utils/commit/ad83bdfc7eb6f33fd46eb85071125406a85d0545))
+
+
+
 ## [3.1.2](https://github.com/vuejs/component-compiler-utils/compare/v3.1.1...v3.1.2) (2020-04-08)
 
 
