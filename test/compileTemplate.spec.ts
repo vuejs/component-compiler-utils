@@ -204,3 +204,31 @@ test('transform srcset', () => {
   )
   expect(vnode.children[18].data.attrs.srcset).toBe('test-url 2x, test-url 3x')
 })
+
+test('transform assetUrls and srcset with base option', () => {
+  const source = `
+<div>
+  <img src="./logo.png">
+  <img src="~fixtures/logo.png">
+  <img src="~/fixtures/logo.png">
+  <img src="./logo.png" srcset="./logo.png 2x, ./logo.png 3x">
+</div>
+`
+  const result = compileTemplate({
+    compiler: compiler as VueTemplateCompiler,
+    filename: 'example.vue',
+    source,
+    transformAssetUrls: true,
+    transformAssetUrlsOptions: { base: '/base/' }
+  })
+
+  expect(result.errors.length).toBe(0)
+
+  const vnode = mockRender(result.code)
+  expect(vnode.children[0].data.attrs.src).toBe('/base/logo.png')
+  expect(vnode.children[2].data.attrs.src).toBe('/base/fixtures/logo.png')
+  expect(vnode.children[4].data.attrs.src).toBe('/base/fixtures/logo.png')
+  expect(vnode.children[6].data.attrs.srcset).toBe(
+    '/base/logo.png 2x, /base/logo.png 3x'
+  )
+})
