@@ -46,6 +46,10 @@ export default postcss.plugin('add-id', (options: any) => (root: Root) => {
           if (n.type !== 'pseudo' && n.type !== 'combinator') {
             node = n
           }
+
+          if (n.type === 'pseudo' && n.value === ':root') {
+            n.value = n.spaces.before = n.spaces.after = ''
+          }
         })
 
         if (node) {
