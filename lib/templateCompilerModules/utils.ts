@@ -1,6 +1,5 @@
 import { TransformAssetUrlsOptions } from './assetUrl'
 import { UrlWithStringQuery, parse as uriParse } from 'url'
-import path from 'path'
 
 export interface Attr {
   name: string
@@ -17,6 +16,9 @@ export function urlToRequire(
   transformAssetUrlsOption: TransformAssetUrlsOptions = {}
 ): string {
   const returnValue = `"${url}"`
+  if (isExternalUrl(url) || isDataUrl(url)) {
+    return returnValue
+  }
   // same logic as in transform-require.js
   const firstChar = url.charAt(0)
   if (firstChar === '~') {
@@ -26,22 +28,12 @@ export function urlToRequire(
 
   const uriParts = parseUriParts(url)
 
-  if (transformAssetUrlsOption.base) {
-    // explicit base - directly rewrite the url into absolute url
-    // does not apply to absolute urls or urls that start with `@`
-    // since they are aliases
-    if (firstChar === '.' || firstChar === '~') {
-      // when packaged in the browser, path will be using the posix-
-      // only version provided by rollup-plugin-node-builtins.
-      return `"${(path.posix || path).join(
-        transformAssetUrlsOption.base,
-        uriParts.path + (uriParts.hash || '')
-      )}"`
-    }
-    return returnValue
-  }
-
-  if (firstChar === '.' || firstChar === '~' || firstChar === '@') {
+  if (
+    firstChar === '.' ||
+    firstChar === '~' ||
+    firstChar === '@' ||
+    transformAssetUrlsOption.forceRequire
+  ) {
     if (!uriParts.hash) {
       return `require("${url}")`
     } else {
@@ -53,6 +45,16 @@ export function urlToRequire(
     }
   }
   return returnValue
+}
+
+const externalRE = /^https?:\/\//
+export function isExternalUrl(url: string): boolean {
+  return externalRE.test(url)
+}
+
+const dataUrlRE = /^\s*data:/i
+export function isDataUrl(url: string): boolean {
+  return dataUrlRE.test(url)
 }
 
 /**
