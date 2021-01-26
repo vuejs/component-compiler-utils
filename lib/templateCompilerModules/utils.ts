@@ -1,5 +1,6 @@
 import { TransformAssetUrlsOptions } from './assetUrl'
 import { UrlWithStringQuery, parse as uriParse } from 'url'
+import path from 'path'
 
 export interface Attr {
   name: string
@@ -27,6 +28,21 @@ export function urlToRequire(
   }
 
   const uriParts = parseUriParts(url)
+
+  if (transformAssetUrlsOption.base) {
+    // explicit base - directly rewrite the url into absolute url
+    // does not apply to absolute urls or urls that start with `@`
+    // since they are aliases
+    if (firstChar === '.' || firstChar === '~') {
+      // when packaged in the browser, path will be using the posix-
+      // only version provided by rollup-plugin-node-builtins.
+      return `"${(path.posix || path).join(
+        transformAssetUrlsOption.base,
+        uriParts.path + (uriParts.hash || '')
+      )}"`
+    }
+    return returnValue
+  }
 
   if (
     firstChar === '.' ||

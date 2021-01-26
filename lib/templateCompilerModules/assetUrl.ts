@@ -7,6 +7,12 @@ export interface AssetURLOptions {
 }
 
 export interface TransformAssetUrlsOptions {
+  /**
+   * @deprecated
+   * If base is provided, instead of transforming relative asset urls into
+   * imports, they will be directly rewritten to absolute urls.
+   */
+  base?: string
   forceRequire?: boolean
 }
 
