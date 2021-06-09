@@ -1,0 +1,18 @@
+diff --git a/node_modules/postcss/lib/previous-map.js b/node_modules/postcss/lib/previous-map.js
+index 49f99ad..ef0066d 100644
+--- a/node_modules/postcss/lib/previous-map.js
++++ b/node_modules/postcss/lib/previous-map.js
+@@ -86,11 +86,11 @@ var PreviousMap = /*#__PURE__*/function () {
+   };
+ 
+   _proto.getAnnotationURL = function getAnnotationURL(sourceMapString) {
+-    return sourceMapString.match(/\/\*\s*# sourceMappingURL=(.*)\s*\*\//)[1].trim();
++    return sourceMapString.match(/\/\*\s*# sourceMappingURL=(.*)\*\//)[1].trim()
+   };
+ 
+   _proto.loadAnnotation = function loadAnnotation(css) {
+-    var annotations = css.match(/\/\*\s*# sourceMappingURL=(.*)\s*\*\//mg);
++    var annotations = css.match(/\/\*\s*# sourceMappingURL=.*\*\//gm);
+ 
+     if (annotations && annotations.length > 0) {
+       // Locate the last sourceMappingURL to avoid picking up
