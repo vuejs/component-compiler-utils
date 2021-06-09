@@ -1,3 +1,12 @@
+## [3.2.1](https://github.com/vuejs/component-compiler-utils/compare/v3.2.0...v3.2.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* patch postcss 7 and bundle it in the published npm package ([#111](https://github.com/vuejs/component-compiler-utils/issues/111)) ([cab504f](https://github.com/vuejs/component-compiler-utils/commit/cab504fb9d900cdef078358870e5ee20d0bc7ec2))
+
+
+
 # [3.2.0](https://github.com/vuejs/component-compiler-utils/compare/v3.1.2...v3.2.0) (2020-07-22)
 
 
