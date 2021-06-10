@@ -65,12 +65,14 @@
     "yorkie": "^2.0.0"
   },
   "dependencies": {
+    "chalk": "^2.4.2",
     "consolidate": "^0.15.1",
     "hash-sum": "^1.0.2",
     "lru-cache": "^4.1.2",
     "merge-source-map": "^1.1.0",
     "postcss-selector-parser": "^6.0.2",
     "source-map": "~0.6.1",
+    "supports-color": "^6.1.0",
     "vue-template-es2015-compiler": "^1.9.0"
   },
   "optionalDependencies": {
