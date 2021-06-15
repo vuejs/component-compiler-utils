@@ -1,3 +1,15 @@
+## [3.2.2](https://github.com/vuejs/component-compiler-utils/compare/v3.2.1...v3.2.2) (2021-06-15)
+
+
+### Reverts
+
+* Revert "fix: patch postcss 7 and bundle it in the published npm package (#111)" ([a9e3afd](https://github.com/vuejs/component-compiler-utils/commit/a9e3afd052856edbcccc0baf8355eb6088e10eaf)), closes [#111](https://github.com/vuejs/component-compiler-utils/issues/111)
+
+### Bug Fixes
+
+* Bump postcss version ([2af0c54](https://github.com/vuejs/component-compiler-utils/commit/2af0c546e15b18d0977477e7f45007c1614edd14))
+
+
 ## [3.2.1](https://github.com/vuejs/component-compiler-utils/compare/v3.2.0...v3.2.1) (2021-06-09)
 
 
