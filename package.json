@@ -6,17 +6,12 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "lib",
-    "third_party"
+    "lib"
   ],
   "scripts": {
     "lint": "prettier --write \"{lib,test}/**/*.ts\"",
-    "pretest": "yarn clean && yarn patch-postcss",
     "test": "prettier --list-different \"{lib,test}/**/*.ts\" && jest --coverage",
-    "clean": "rm -rf dist third_party",
-    "patch-postcss": "patch-package && mkdir -p third_party/postcss && cp -R node_modules/postcss third_party/",
-    "prebuild": "yarn clean && yarn patch-postcss",
-    "build": "ttsc",
+    "build": "rm -rf dist && tsc",
     "prepublishOnly": "yarn build && conventional-changelog -p angular -r 2 -i CHANGELOG.md -s"
   },
   "gitHooks": {
@@ -51,15 +46,11 @@
     "jest": "^24.0.0",
     "less": "^3.9.0",
     "lint-staged": "^8.1.1",
-    "patch-package": "^6.4.7",
-    "postcss": "^7.0.35",
     "pug": "^2.0.3",
     "sass": "^1.17.3",
     "stylus": "^0.54.5",
     "ts-jest": "^24.0.0",
-    "ttypescript": "^1.5.12",
     "typescript": "^3.3.0",
-    "typescript-transform-paths": "^2.2.4",
     "vue": "^2.6.6",
     "vue-template-compiler": "^2.6.6",
     "yorkie": "^2.0.0"
@@ -69,6 +60,7 @@
     "hash-sum": "^1.0.2",
     "lru-cache": "^4.1.2",
     "merge-source-map": "^1.1.0",
+    "postcss": "^7.0.14",
     "postcss-selector-parser": "^6.0.2",
     "source-map": "~0.6.1",
     "vue-template-es2015-compiler": "^1.9.0"
