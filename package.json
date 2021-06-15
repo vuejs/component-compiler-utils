@@ -1,6 +1,6 @@
 {
   "name": "@vue/component-compiler-utils",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "Lower level utilities for compiling Vue single file components",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
