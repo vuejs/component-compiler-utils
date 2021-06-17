@@ -32,13 +32,19 @@ export interface VueTemplateCompiler {
 // part of the vue monorepo.
 export interface VueTemplateCompilerOptions {
   modules?: Object[]
-  outputSourceRange?: boolean
-  whitespace?: 'preserve' | 'condense'
   directives?: { [key: string]: Function }
+  preserveWhitespace?: boolean
+  whitespace?: 'preserve' | 'condense'
+  outputSourceRange?: boolean
+  // allows tooling authors to use a non-default template compiler, which may have different options
+  [key: string]: any
 }
 
 export interface VueTemplateCompilerParseOptions {
-  pad?: 'line' | 'space'
+  pad?: true | 'line' | 'space'
+  deindent?: boolean
+  // allows tooling authors to use a non-default template compiler, which may have different options
+  [key: string]: any
 }
 
 export interface ErrorWithRange {

@@ -91,7 +91,7 @@ function generateSourceMap(
   source: string,
   generated: string,
   sourceRoot: string,
-  pad?: 'line' | 'space'
+  pad?: true | 'line' | 'space'
 ): RawSourceMap {
   const map = new SourceMapGenerator({
     file: filename.replace(/\\/g, '/'),
