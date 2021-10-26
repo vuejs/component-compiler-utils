@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/vuejs/component-compiler-utils/compare/v3.2.2...v3.3.0) (2021-10-26)
+
+### New Feature
+
+* allow prettier v2 to be the optional dependency ([#89](https://github.com/vuejs/component-compiler-utils/pull/89)) ([cab504f](https://github.com/vuejs/component-compiler-utils/commit/26de735854a7288d704a606a054bff51f7d7307f))
+
+
 ## [3.2.2](https://github.com/vuejs/component-compiler-utils/compare/v3.2.1...v3.2.2) (2021-06-15)
 
 
