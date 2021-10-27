@@ -135,3 +135,16 @@ test('spaces before pseudo element', () => {
   expect(code).toContain('.abc[test],')
   expect(code).toContain('[test]::selection {')
 })
+
+test('scoped :root selector', () => {
+  const { code } = compileStyle({
+    source: `:root { --color: red; }
+:root p { --color: blue; }
+`,
+    filename: 'test.css',
+    id: 'test'
+  })
+
+  expect(code).toContain(':root [test] { --color: red;')
+  expect(code).toContain(':root p[test] { --color: blue;')
+})
