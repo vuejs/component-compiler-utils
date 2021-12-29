@@ -138,9 +138,10 @@ test('async postcss plugin in sync mode', () => {
     source: '.foo { color: red }',
     scoped: false,
     postcssPlugins: [
-      require('postcss').plugin('test-plugin', () => async (result: any) =>
-        result
-      )
+      {
+        postcssPlugin: 'test-plugin',
+        Once: async (result: any) => result
+      }
     ]
   })
 
@@ -154,9 +155,10 @@ test('async postcss plugin', async () => {
     source: '.foo { color: red }',
     scoped: false,
     postcssPlugins: [
-      require('postcss').plugin('test-plugin', () => async (result: any) =>
-        result
-      )
+      {
+        postcssPlugin: 'test-plugin',
+        Once: async (result: any) => result
+      }
     ]
   })
 
