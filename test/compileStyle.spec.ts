@@ -113,7 +113,12 @@ test('custom postcss plugin', () => {
     filename: 'example.vue',
     source: '.foo { color: red }',
     scoped: false,
-    postcssPlugins: [require('postcss').plugin('test-plugin', () => spy)()]
+    postcssPlugins: [
+      {
+        postcssPlugin: 'test-plugin',
+        Once: spy
+      }
+    ]
   })
 
   expect(spy).toHaveBeenCalled()
