@@ -10,7 +10,7 @@ The API surface is intentionally minimal - the goal is to reuse as much as possi
 
 Since this package is more often used as a low-level utility, it is usually a transitive dependency in an actual Vue project. It is therefore the responsibility of the higher-level package (e.g. `vue-loader`) to inject `vue-template-compiler` via options when calling the `parse` and `compileTemplate` methods.
 
-Not listing it as a peer depedency also allows tooling authors to use a non-default template compiler instead of `vue-template-compiler` without having to include it just to fullfil the peer dep requirement.
+Not listing it as a peer dependency also allows tooling authors to use a non-default template compiler instead of `vue-template-compiler` without having to include it just to fullfil the peer dependency requirement.
 
 ## API
 
